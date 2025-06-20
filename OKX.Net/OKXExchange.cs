@@ -42,7 +42,7 @@ namespace OKX.Net
         /// </summary>
         public static ExchangeType Type { get; } = ExchangeType.CEX;
 
-        internal const string ClientOrderId = "1425d83a94fbBCDE";
+        internal const string ClientOrderId = "c84128021aecBCDE";
         internal const string ClientOrderIdPrefix = ClientOrderId + LibraryHelpers.ClientOrderIdSeparator;
 
         internal static JsonSerializerContext _serializerContext = JsonSerializerContextCache.GetOrCreate<OKXSourceGenerationContext>();
