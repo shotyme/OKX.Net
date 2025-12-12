@@ -77,6 +77,9 @@
         <member name="T:OKX.Net.Clients.OKXUserClientProvider">
             <inheritdoc />
         </member>
+        <member name="P:OKX.Net.Clients.OKXUserClientProvider.ExchangeName">
+            <inheritdoc />
+        </member>
         <member name="M:OKX.Net.Clients.OKXUserClientProvider.#ctor(System.Action{OKX.Net.Objects.Options.OKXOptions})">
             <summary>
             ctor
@@ -89,6 +92,9 @@
             </summary>
         </member>
         <member name="M:OKX.Net.Clients.OKXUserClientProvider.InitializeUserClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,OKX.Net.OKXEnvironment)">
+            <inheritdoc />
+        </member>
+        <member name="M:OKX.Net.Clients.OKXUserClientProvider.ClearUserClients(System.String)">
             <inheritdoc />
         </member>
         <member name="M:OKX.Net.Clients.OKXUserClientProvider.GetRestClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,OKX.Net.OKXEnvironment)">
@@ -116,6 +122,9 @@
             <inheritdoc />
         </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApi.GetTimeOffset">
+            <inheritdoc />
+        </member>
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApi.TryParseError(CryptoExchange.Net.Objects.RequestDefinition,System.Collections.Generic.KeyValuePair{System.String,System.String[]}[],CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApi.ParseErrorResponse(System.Int32,System.Collections.Generic.KeyValuePair{System.String,System.String[]}[],CryptoExchange.Net.Interfaces.IMessageAccessor,System.Exception)">
@@ -151,10 +160,10 @@
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiAccount.SetLeverageAsync(System.Int32,OKX.Net.Enums.MarginMode,System.String,System.String,System.Nullable{OKX.Net.Enums.PositionSide},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiAccount.GetMaximumAmountAsync(System.String,OKX.Net.Enums.TradeMode,System.String,System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiAccount.GetMaximumAmountAsync(System.String,OKX.Net.Enums.TradeMode,System.String,System.Nullable{System.Decimal},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiAccount.GetMaximumAvailableAmountAsync(System.String,OKX.Net.Enums.TradeMode,System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiAccount.GetMaximumAvailableAmountAsync(System.String,OKX.Net.Enums.TradeMode,System.String,System.Nullable{System.Boolean},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiAccount.SetMarginAmountAsync(System.String,OKX.Net.Enums.PositionSide,OKX.Net.Enums.MarginAddReduce,System.Decimal,System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
@@ -187,7 +196,7 @@
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiAccount.TransferAsync(System.String,System.Decimal,OKX.Net.Enums.TransferType,OKX.Net.Enums.AccountType,OKX.Net.Enums.AccountType,System.String,System.String,System.String,System.Nullable{System.Boolean},System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiAccount.GetFundingBillDetailsAsync(System.String,System.Nullable{OKX.Net.Enums.FundingBillType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.String,System.Threading.CancellationToken)">
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiAccount.GetFundingBillDetailsAsync(System.String,System.Nullable{OKX.Net.Enums.FundingBillType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiAccount.GetLightningDepositsAsync(System.String,System.Decimal,System.Nullable{OKX.Net.Enums.LightningDepositAccount},System.Threading.CancellationToken)">
@@ -257,6 +266,18 @@
             <inheritdoc />
         </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiAccount.GetSymbolsAsync(OKX.Net.Enums.InstrumentType,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiAccount.SetFeeTypeAsync(OKX.Net.Enums.FeeType,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiAccount.SetSettleAssetAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiCopyTrading.GetAccountConfigurationAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiCopyTrading.GetLeadTraderCurrentLeadPositionsAsync(System.String,System.String,System.String,System.String,System.Int32,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiExchangeData.GetTickersAsync(OKX.Net.Enums.InstrumentType,System.String,System.String,System.Threading.CancellationToken)">
@@ -415,7 +436,7 @@
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiSubAccounts.TransferBetweenSubAccountsAsync(System.String,System.Decimal,OKX.Net.Enums.AccountType,OKX.Net.Enums.AccountType,System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiTrading.PlaceOrderAsync(System.String,OKX.Net.Enums.OrderSide,OKX.Net.Enums.OrderType,System.Decimal,System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.PositionSide},System.Nullable{OKX.Net.Enums.TradeMode},System.Collections.Generic.IEnumerable{OKX.Net.Objects.Trade.OKXAttachedAlgoOrder},System.Nullable{OKX.Net.Enums.QuickMarginType},System.Nullable{System.Int32},System.Nullable{OKX.Net.Enums.SelfTradePreventionMode},System.String,System.Nullable{OKX.Net.Enums.QuantityAsset},System.String,System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiTrading.PlaceOrderAsync(System.String,OKX.Net.Enums.OrderSide,OKX.Net.Enums.OrderType,System.Decimal,System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.PositionSide},System.Nullable{OKX.Net.Enums.TradeMode},System.Collections.Generic.IEnumerable{OKX.Net.Objects.Trade.OKXAttachedAlgoOrder},System.Nullable{OKX.Net.Enums.QuickMarginType},System.Nullable{System.Int32},System.Nullable{OKX.Net.Enums.SelfTradePreventionMode},System.String,System.Nullable{OKX.Net.Enums.QuantityAsset},System.String,System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Boolean},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiTrading.CheckOrderAsync(System.String,OKX.Net.Enums.OrderSide,OKX.Net.Enums.OrderType,System.Decimal,System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.PositionSide},System.Nullable{OKX.Net.Enums.TradeMode},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.TriggerPriceType},System.Nullable{OKX.Net.Enums.TriggerPriceType},System.Nullable{OKX.Net.Enums.QuantityAsset},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
@@ -460,7 +481,7 @@
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiTrading.GetUserTradesArchiveAsync(OKX.Net.Enums.InstrumentType,System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiTrading.PlaceAlgoOrderAsync(System.String,OKX.Net.Enums.TradeMode,OKX.Net.Enums.OrderSide,OKX.Net.Enums.AlgoOrderType,System.Nullable{System.Decimal},System.String,System.Nullable{System.Boolean},System.Nullable{OKX.Net.Enums.PositionSide},System.Nullable{OKX.Net.Enums.QuantityAsset},System.Nullable{OKX.Net.Enums.AlgoPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.AlgoPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.PriceVariance},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int64},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Boolean},System.Nullable{OKX.Net.Enums.QuickMarginType},System.String,System.Nullable{OKX.Net.Enums.ChaseType},System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.ChaseType},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiTrading.PlaceAlgoOrderAsync(System.String,OKX.Net.Enums.TradeMode,OKX.Net.Enums.OrderSide,OKX.Net.Enums.AlgoOrderType,System.Nullable{System.Decimal},System.String,System.Nullable{System.Boolean},System.Nullable{OKX.Net.Enums.PositionSide},System.Nullable{OKX.Net.Enums.QuantityAsset},System.Nullable{OKX.Net.Enums.AlgoPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.AlgoPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.PriceVariance},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int64},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Boolean},System.Nullable{OKX.Net.Enums.QuickMarginType},System.String,System.Nullable{OKX.Net.Enums.ChaseType},System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.ChaseType},System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXRestClientUnifiedApiTrading.CancelAlgoOrderAsync(System.Collections.Generic.IEnumerable{OKX.Net.Objects.Trade.OKXAlgoOrderRequest},System.Threading.CancellationToken)">
@@ -496,7 +517,7 @@
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApi.CreateSerializer">
             <inheritdoc />
         </member>
-        <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApi.CreateAccessor">
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApi.CreateAccessor(System.Net.WebSockets.WebSocketMessageType)">
             <inheritdoc />
         </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
@@ -547,10 +568,19 @@
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToOpenInterestUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Public.OKXOpenInterest}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToOpenInterestUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Public.OKXOpenInterest}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToKlineUpdatesAsync(System.String,OKX.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Market.OKXKline}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},OKX.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Market.OKXKline}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Market.OKXTrade}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Market.OKXTrade}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToEstimatedPriceUpdatesAsync(OKX.Net.Enums.InstrumentType,System.String,System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Public.OKXEstimatedPrice}},System.Threading.CancellationToken)">
@@ -559,13 +589,22 @@
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToMarkPriceUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Public.OKXMarkPrice}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToMarkPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Public.OKXMarkPrice}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToMarkPriceKlineUpdatesAsync(System.String,OKX.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Market.OKXMiniKline[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToPriceLimitUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Public.OKXLimitPrice}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToPriceLimitUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Public.OKXLimitPrice}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToOrderBookUpdatesAsync(System.String,OKX.Net.Enums.OrderBookType,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Market.OKXOrderBook}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},OKX.Net.Enums.OrderBookType,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Market.OKXOrderBook}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToOptionSummaryUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Public.OKXOptionSummary[]}},System.Threading.CancellationToken)">
@@ -574,10 +613,16 @@
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToFundingRateUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Public.OKXFundingRate}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToFundingRateUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Public.OKXFundingRate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToIndexKlineUpdatesAsync(System.String,OKX.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Market.OKXMiniKline[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToIndexTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Market.OKXIndexTicker}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToIndexTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Market.OKXIndexTicker}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiExchangeData.SubscribeToSystemStatusUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.System.OKXStatus}},System.Threading.CancellationToken)">
@@ -586,7 +631,7 @@
         <member name="T:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiTrading">
             <inheritdoc />
         </member>
-        <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiTrading.PlaceOrderAsync(System.String,OKX.Net.Enums.OrderSide,OKX.Net.Enums.OrderType,OKX.Net.Enums.TradeMode,System.Decimal,System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.PositionSide},System.Nullable{OKX.Net.Enums.QuickMarginType},System.Nullable{System.Int32},System.Nullable{OKX.Net.Enums.SelfTradePreventionMode},System.String,System.Nullable{OKX.Net.Enums.QuantityAsset},System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+        <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiTrading.PlaceOrderAsync(System.String,OKX.Net.Enums.OrderSide,OKX.Net.Enums.OrderType,OKX.Net.Enums.TradeMode,System.Decimal,System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.PositionSide},System.Nullable{OKX.Net.Enums.QuickMarginType},System.Nullable{System.Int32},System.Nullable{OKX.Net.Enums.SelfTradePreventionMode},System.String,System.Nullable{OKX.Net.Enums.QuantityAsset},System.String,System.Nullable{System.Boolean},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:OKX.Net.Clients.UnifiedApi.OKXSocketClientUnifiedApiTrading.PlaceMultipleOrdersAsync(System.Collections.Generic.IEnumerable{OKX.Net.Objects.Trade.OKXOrderPlaceRequest},System.Threading.CancellationToken)">
@@ -737,6 +782,11 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.CollateralRestrictionStatus">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.ContractType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -753,6 +803,11 @@
             </summary>
         </member>
         <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.ConvertUnit">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.CopyTradingRole">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -778,6 +833,11 @@
             </summary>
         </member>
         <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.NullableFeeRateCategory">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.FeeType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -1347,6 +1407,16 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXFeeType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXFeeTypeArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXFiatFee">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -1467,6 +1537,16 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXSettleAsset">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXSettleAssetArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXTradeReference">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -1493,6 +1573,36 @@
             </summary>
         </member>
         <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXInviteeDetailsArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXCopyTradingAccount">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXCopyTradingAccountArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXCopyTradingAccountDetails">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXCopyTradingAccountDetailsArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXCurrentSubposition">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXCurrentSubpositionArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -1592,6 +1702,11 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXRestApiResponseOKXFeeTypeArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXRestApiResponseOKXInterestAccruedArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -1637,12 +1752,27 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXRestApiResponseOKXSettleAssetArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXRestApiResponseOKXWithdrawalAmountArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
         <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXRestApiResponseOKXInviteeDetailsArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXRestApiResponseOKXCopyTradingAccountArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXRestApiResponseOKXCurrentSubpositionArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -2587,6 +2717,11 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXConnectionCount">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:OKX.Net.Converters.OKXSourceGenerationContext.OKXSocketArgs">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -3336,6 +3471,46 @@
             It is both quota currency before and after placing order
             </summary>
         </member>
+        <member name="T:OKX.Net.Enums.CollateralRestrictionStatus">
+            <summary>
+            Collateral restriction status
+            </summary>
+        </member>
+        <member name="F:OKX.Net.Enums.CollateralRestrictionStatus.NoRestriction">
+            <summary>
+            The restriction is not enabled
+            </summary>
+        </member>
+        <member name="F:OKX.Net.Enums.CollateralRestrictionStatus.NoRestrictionButCloseToLimit">
+            <summary>
+            The restriction is not enabled. But the crypto is close to the platform's collateral limit
+            </summary>
+        </member>
+        <member name="F:OKX.Net.Enums.CollateralRestrictionStatus.Restricted">
+            <summary>
+            The restriction is enabled. This crypto can't be used as margin for your new orders
+            </summary>
+        </member>
+        <member name="T:OKX.Net.Enums.CopyTradingRole">
+            <summary>
+            Copy trading role
+            </summary>
+        </member>
+        <member name="F:OKX.Net.Enums.CopyTradingRole.GeneralUser">
+            <summary>
+            General user
+            </summary>
+        </member>
+        <member name="F:OKX.Net.Enums.CopyTradingRole.LeadingTrader">
+            <summary>
+            Leading trader
+            </summary>
+        </member>
+        <member name="F:OKX.Net.Enums.CopyTradingRole.CopyTrader">
+            <summary>
+            Copy trader
+            </summary>
+        </member>
         <member name="T:OKX.Net.Enums.DepositType">
             <summary>
             Deposit type
@@ -3409,6 +3584,11 @@
         <member name="T:OKX.Net.Enums.KlineInterval">
             <summary>
             Period
+            </summary>
+        </member>
+        <member name="F:OKX.Net.Enums.KlineInterval.OneSecond">
+            <summary>
+            1s
             </summary>
         </member>
         <member name="F:OKX.Net.Enums.KlineInterval.OneMinute">
@@ -3890,6 +4070,11 @@
             <param name="credentials">The credentials for the user</param>
             <param name="environment">The environment to use</param>
         </member>
+        <member name="M:OKX.Net.Interfaces.Clients.IOKXUserClientProvider.ClearUserClients(System.String)">
+            <summary>
+            Reset the cached clients for a user. This can be useful when a user changes API credentials.
+            </summary>
+        </member>
         <member name="M:OKX.Net.Interfaces.Clients.IOKXUserClientProvider.GetRestClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,OKX.Net.OKXEnvironment)">
             <summary>
             Get the Rest client for a specific user. In case the client does not exist yet it will be created and the <paramref name="credentials"/> should be provided, unless <see cref="M:OKX.Net.Interfaces.Clients.IOKXUserClientProvider.InitializeUserClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,OKX.Net.OKXEnvironment)" /> has been called prior for this user.
@@ -3939,6 +4124,12 @@
             <summary>
             Get the shared rest requests client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
             </summary>
+        </member>
+        <member name="P:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXRestClientUnifiedApi.CopyTrading">
+            <summary>
+            Endpoints related to copy trading
+            </summary>
+            <see cref="T:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXRestClientUnifiedApiCopyTrading"/>
         </member>
         <member name="T:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXRestClientUnifiedApiAccount">
             <summary>
@@ -4113,7 +4304,7 @@
             <param name="ct">Cancellation Token</param>
             <returns></returns>
         </member>
-        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXRestClientUnifiedApiAccount.GetFundingBillDetailsAsync(System.String,System.Nullable{OKX.Net.Enums.FundingBillType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.String,System.Threading.CancellationToken)">
+        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXRestClientUnifiedApiAccount.GetFundingBillDetailsAsync(System.String,System.Nullable{OKX.Net.Enums.FundingBillType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get billing records, you can get the latest 1 month historical data
             <para><a href="https://www.okx.com/docs-v5/en/#funding-account-rest-api-asset-bills-details" /></para>
@@ -4123,6 +4314,8 @@
             <param name="startTime">Pagination of data to return records earlier than the requested ts</param>
             <param name="endTime">Pagination of data to return records newer than the requested ts</param>
             <param name="limit">Number of results per request. The maximum is 100; the default is 100.</param>
+            <param name="startBillId">Filter by start bill id</param>
+            <param name="endBillId">Filter by end bill id</param>
             <param name="clientId">Client id</param>
             <param name="ct">Cancellation Token</param>
             <returns></returns>
@@ -4172,7 +4365,7 @@
             <param name="ct">Cancellation Token</param>
             <returns></returns>
         </member>
-        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXRestClientUnifiedApiAccount.GetMaximumAmountAsync(System.String,OKX.Net.Enums.TradeMode,System.String,System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXRestClientUnifiedApiAccount.GetMaximumAmountAsync(System.String,OKX.Net.Enums.TradeMode,System.String,System.Nullable{System.Decimal},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
             <summary>
             Get maximum buy/sell amount or open amount
             <para><a href="https://www.okx.com/docs-v5/en/#trading-account-rest-api-get-maximum-buy-sell-amount-or-open-amount" /></para>
@@ -4182,10 +4375,11 @@
             <param name="asset">Asset</param>
             <param name="price">Price</param>
             <param name="leverage">Leverage</param>
+            <param name="tradeQuoteAsset">The quote currency used for trading. Only applicable to SPOT. The default value is the quote currency of the symbol, for example: for BTC-USD, the default is USD.</param>
             <param name="ct">Cancellation Token</param>
             <returns></returns>
         </member>
-        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXRestClientUnifiedApiAccount.GetMaximumAvailableAmountAsync(System.String,OKX.Net.Enums.TradeMode,System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXRestClientUnifiedApiAccount.GetMaximumAvailableAmountAsync(System.String,OKX.Net.Enums.TradeMode,System.String,System.Nullable{System.Boolean},System.String,System.Threading.CancellationToken)">
             <summary>
             Get Maximum Available Tradable Amount
             <para><a href="https://www.okx.com/docs-v5/en/#trading-account-rest-api-get-maximum-available-tradable-amount" /></para>
@@ -4194,6 +4388,7 @@
             <param name="tradeMode">Trade Mode</param>
             <param name="asset">Currency</param>
             <param name="reduceOnly">Reduce Only</param>
+            <param name="tradeQuoteAsset">The quote currency used for trading. Only applicable to SPOT. The default value is the quote currency of the symbol, for example: for BTC-USD, the default is USD.</param>
             <param name="ct">Cancellation Token</param>
             <returns></returns>
         </member>
@@ -4477,6 +4672,48 @@
             <param name="instrumentFamily">Instrument family</param>
             <param name="ct">Cancellation Token</param>
         </member>
+        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXRestClientUnifiedApiAccount.SetFeeTypeAsync(OKX.Net.Enums.FeeType,System.Threading.CancellationToken)">
+            <summary>
+            Set fee charge type for spot trading
+            <para><a href="https://www.okx.com/docs-v5/en/#trading-account-rest-api-set-fee-type" /></para>
+            </summary>
+            <param name="feeType">Fee type</param>
+            <param name="ct">Cancellation Token</param>
+        </member>
+        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXRestClientUnifiedApiAccount.SetSettleAssetAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Set settlement asset for USD contracts
+            <para><a href="https://www.okx.com/docs-v5/en/#trading-account-rest-api-set-settle-currency" /></para>
+            </summary>
+            <param name="settleAsset">The settlement asset</param>
+            <param name="ct">Cancellation Token</param>
+        </member>
+        <member name="T:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXRestClientUnifiedApiCopyTrading">
+            <summary>
+            Copy trading endpoints
+            </summary>
+        </member>
+        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXRestClientUnifiedApiCopyTrading.GetAccountConfigurationAsync(System.Threading.CancellationToken)">
+            <summary>
+            Retrieve current account configuration related to copy/lead tradingt.
+            <para><a href="https://www.okx.com/docs-v5/en/#order-book-trading-copy-trading-get-account-configuration" /></para>
+            </summary>
+            <param name="ct">Cancellation Token</param>
+            <returns></returns>
+        </member>
+        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXRestClientUnifiedApiCopyTrading.GetLeadTraderCurrentLeadPositionsAsync(System.String,System.String,System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get current leading positions of lead trader.
+            <para><a href="https://www.okx.com/docs-v5/zh/#order-book-trading-copy-trading-get-lead-trader-current-lead-positions" /></para>
+            </summary>
+            <param name="uniqueCode">Lead trader unique code. A combination of case-sensitive alphanumerics, all numbers and the length is 16 characters</param>
+            <param name="instType">Instrument type. SWAP, the default value.</param>
+            <param name="after">Pagination of data to return records earlier than the requested PositionId.</param>
+            <param name="before">Pagination of data to return records newer than the requested PositionId.</param>
+            <param name="limit">Number of results per request. Maximum is 100. Default is 100.</param>
+            <param name="ct">Cancellation Token</param>
+            <returns></returns>
+        </member>
         <member name="T:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXRestClientUnifiedApiExchangeData">
             <summary>
             Unified exchange data endpoints
@@ -4559,7 +4796,7 @@
             <param name="symbol">Symbol, for example `BTC-USD-SWAP`</param>
             <param name="startTime">Pagination of data to return records earlier than the requested ts</param>
             <param name="endTime">Pagination of data to return records newer than the requested ts</param>
-            <param name="limit">Number of results per request. The maximum is 100; the default is 100.</param>
+            <param name="limit">Number of results per request. The maximum is 400; the default is 100.</param>
             <param name="ct">Cancellation Token</param>
             <returns></returns>
         </member>
@@ -4649,7 +4886,7 @@
             <param name="period">Kline interval</param>
             <param name="startTime">Pagination of data to return records earlier than the requested ts</param>
             <param name="endTime">Pagination of data to return records newer than the requested ts</param>
-            <param name="limit">Number of results per request. The maximum is 100; the default is 100.</param>
+            <param name="limit">Number of results per request. The maximum is 300; the default is 100.</param>
             <param name="ct">Cancellation Token</param>
             <returns></returns>
         </member>
@@ -5292,7 +5529,7 @@
             <param name="ct">Cancellation Token</param>
             <returns></returns>
         </member>
-        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXRestClientUnifiedApiTrading.PlaceAlgoOrderAsync(System.String,OKX.Net.Enums.TradeMode,OKX.Net.Enums.OrderSide,OKX.Net.Enums.AlgoOrderType,System.Nullable{System.Decimal},System.String,System.Nullable{System.Boolean},System.Nullable{OKX.Net.Enums.PositionSide},System.Nullable{OKX.Net.Enums.QuantityAsset},System.Nullable{OKX.Net.Enums.AlgoPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.AlgoPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.PriceVariance},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int64},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Boolean},System.Nullable{OKX.Net.Enums.QuickMarginType},System.String,System.Nullable{OKX.Net.Enums.ChaseType},System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.ChaseType},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXRestClientUnifiedApiTrading.PlaceAlgoOrderAsync(System.String,OKX.Net.Enums.TradeMode,OKX.Net.Enums.OrderSide,OKX.Net.Enums.AlgoOrderType,System.Nullable{System.Decimal},System.String,System.Nullable{System.Boolean},System.Nullable{OKX.Net.Enums.PositionSide},System.Nullable{OKX.Net.Enums.QuantityAsset},System.Nullable{OKX.Net.Enums.AlgoPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.AlgoPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.PriceVariance},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int64},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Boolean},System.Nullable{OKX.Net.Enums.QuickMarginType},System.String,System.Nullable{OKX.Net.Enums.ChaseType},System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.ChaseType},System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
             <summary>
             Place new algo order. The algo order includes trigger order, oco order, conditional order,iceberg order and twap order.
             <para><a href="https://www.okx.com/docs-v5/en/#order-book-trading-algo-trading-post-place-algo-order" /></para>
@@ -5330,6 +5567,7 @@
             <param name="chaseValue">Chase value, with chaseType.Distance it represents the USD chase value, with chaseType.Ratio 0.1 means 10%</param>
             <param name="maxChaseType">Max chase order value type</param>
             <param name="maxChaseValue">Max chase value, with chaseType.Distance it represents the USD chase value, with chaseType.Ratio 0.1 means 10%</param>
+            <param name="tradeQuoteAsset">The quote currency used for trading. Only applicable to SPOT. The default value is the quote currency of the symbol, for example: for BTC-USD, the default is USD.</param>
             <param name="ct">Cancellation Token</param>
             <returns></returns>
         </member>
@@ -5342,7 +5580,7 @@
             <param name="ct">Cancellation Token</param>
             <returns></returns>
         </member>
-        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXRestClientUnifiedApiTrading.PlaceOrderAsync(System.String,OKX.Net.Enums.OrderSide,OKX.Net.Enums.OrderType,System.Decimal,System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.PositionSide},System.Nullable{OKX.Net.Enums.TradeMode},System.Collections.Generic.IEnumerable{OKX.Net.Objects.Trade.OKXAttachedAlgoOrder},System.Nullable{OKX.Net.Enums.QuickMarginType},System.Nullable{System.Int32},System.Nullable{OKX.Net.Enums.SelfTradePreventionMode},System.String,System.Nullable{OKX.Net.Enums.QuantityAsset},System.String,System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXRestClientUnifiedApiTrading.PlaceOrderAsync(System.String,OKX.Net.Enums.OrderSide,OKX.Net.Enums.OrderType,System.Decimal,System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.PositionSide},System.Nullable{OKX.Net.Enums.TradeMode},System.Collections.Generic.IEnumerable{OKX.Net.Objects.Trade.OKXAttachedAlgoOrder},System.Nullable{OKX.Net.Enums.QuickMarginType},System.Nullable{System.Int32},System.Nullable{OKX.Net.Enums.SelfTradePreventionMode},System.String,System.Nullable{OKX.Net.Enums.QuantityAsset},System.String,System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Boolean},System.String,System.Threading.CancellationToken)">
             <summary>
             Place a new order
             <para><a href="https://www.okx.com/docs-v5/en/#order-book-trading-trade-post-place-order" /></para>
@@ -5366,6 +5604,7 @@
             <param name="priceUsd">Place options orders in USD, only applicable to OPTIONS</param>
             <param name="priceVol">Place options orders based on implied volatility, where 1 represents 100%. Only applicable to OPTIONS</param>
             <param name="banAmend">Whether to disallow the system from amending the size of the SPOT Market Order, if true, system will not amend and reject the market order if user does not have sufficient funds.</param>
+            <param name="tradeQuoteAsset">The quote currency used for trading. Only applicable to SPOT. The default value is the quote currency of the symbol, for example: for BTC-USD, the default is USD.</param>
             <param name="ct">Cancellation Token</param>
             <returns></returns>
         </member>
@@ -5520,6 +5759,16 @@
             <param name="ct">Cancellation Token</param>
             <returns></returns>
         </member>
+        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXSocketClientUnifiedApiExchangeData.SubscribeToFundingRateUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Public.OKXFundingRate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to funding rate updates. Data will be pushed every minute.
+            <para><a href="https://www.okx.com/docs-v5/en/#public-data-websocket-funding-rate-channel" /></para>
+            </summary>
+            <param name="symbols">Array of symbols, for example `ETH-USDT-SWAP`,'BTC-USDT-SWAP'</param>
+            <param name="onData">On Data Handler</param>
+            <param name="ct">Cancellation Token</param>
+            <returns></returns>
+        </member>
         <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXSocketClientUnifiedApiExchangeData.SubscribeToIndexKlineUpdatesAsync(System.String,OKX.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Market.OKXMiniKline[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to the index klime/candlesticks updates. Data will be pushed every 500 ms.
@@ -5541,12 +5790,32 @@
             <param name="ct">Cancellation Token</param>
             <returns></returns>
         </member>
+        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXSocketClientUnifiedApiExchangeData.SubscribeToIndexTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Market.OKXIndexTicker}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to index tickers data updates
+            <para><a href="https://www.okx.com/docs-v5/en/#public-data-websocket-index-tickers-channel" /></para>
+            </summary>
+            <param name="symbols">Array of symbols, for example `ETH-USDT`,'BTC-USDT'</param>
+            <param name="onData">On Data Handler</param>
+            <param name="ct">Cancellation Token</param>
+            <returns></returns>
+        </member>
         <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXSocketClientUnifiedApiExchangeData.SubscribeToOpenInterestUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Public.OKXOpenInterest}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to the open interest updates. Data will by pushed every 3 seconds.
             <para><a href="https://www.okx.com/docs-v5/en/#public-data-websocket-open-interest-channel" /></para>
             </summary>
             <param name="symbol">Symbol, for example `BTC-USD-SWAP`</param>
+            <param name="onData">On Data Handler</param>
+            <param name="ct">Cancellation Token</param>
+            <returns></returns>
+        </member>
+        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXSocketClientUnifiedApiExchangeData.SubscribeToOpenInterestUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Public.OKXOpenInterest}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to the open interest updates. Data will by pushed every 3 seconds.
+            <para><a href="https://www.okx.com/docs-v5/en/#public-data-websocket-open-interest-channel" /></para>
+            </summary>
+            <param name="symbols">Array of symbols, for example `ETH-USDT-SWAP`,'BTC-USDT-SWAP'</param>
             <param name="onData">On Data Handler</param>
             <param name="ct">Cancellation Token</param>
             <returns></returns>
@@ -5562,12 +5831,33 @@
             <param name="ct">Cancellation Token</param>
             <returns></returns>
         </member>
+        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXSocketClientUnifiedApiExchangeData.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},OKX.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Market.OKXKline}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to kline/candlesticks updates of multiple symbols. Data will be pushed every 500 ms.
+            <para><a href="https://www.okx.com/docs-v5/en/#order-book-trading-market-data-ws-candlesticks-channel" /></para>
+            </summary>
+            <param name="symbols">Array of symbols, for example `ETH-USDT`,'BTC-USDT'</param>
+            <param name="period">Kline interval</param>
+            <param name="onData">On Data Handler</param>
+            <param name="ct">Cancellation Token</param>
+            <returns></returns>
+        </member>
         <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXSocketClientUnifiedApiExchangeData.SubscribeToMarkPriceUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Public.OKXMarkPrice}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to the mark price updates. Data will be pushed every 200 ms when the mark price changes, and will be pushed every 10 seconds when the mark price does not change.
             <para><a href="https://www.okx.com/docs-v5/en/#public-data-websocket-mark-price-channel" /></para>
             </summary>
             <param name="symbol">Symbol, for example `BTC-USD-SWAP`</param>
+            <param name="onData">On Data Handler</param>
+            <param name="ct">Cancellation Token</param>
+            <returns></returns>
+        </member>
+        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXSocketClientUnifiedApiExchangeData.SubscribeToMarkPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Public.OKXMarkPrice}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to the mark price updates. Data will be pushed every 200 ms when the mark price changes, and will be pushed every 10 seconds when the mark price does not change.
+            <para><a href="https://www.okx.com/docs-v5/en/#public-data-websocket-mark-price-channel" /></para>
+            </summary>
+            <param name="symbols">Array of symbols, for example `BTC-USD-SWAP`, `ETH-USD-SWAP` </param>
             <param name="onData">On Data Handler</param>
             <param name="ct">Cancellation Token</param>
             <returns></returns>
@@ -5609,12 +5899,38 @@
             <param name="ct">Cancellation Token</param>
             <returns></returns>
         </member>
+        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXSocketClientUnifiedApiExchangeData.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},OKX.Net.Enums.OrderBookType,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Market.OKXOrderBook}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to order book data updates.<br />
+            Use OrderBookType.OrderBook for 400 depth levels, OrderBook_5 for 5 depth levels, OrderBook_50_l2_TBT tick-by-tick 50 depth levels, and OrderBook_l2_TBT for tick-by-tick 400 depth levels.<br />
+            OrderBookType.OrderBook: 400 depth levels will be pushed in the initial full snapshot. Incremental data will be pushed every 100 ms when there is change in order book.<br />
+            OrderBookType.OrderBook_5: 5 depth levels will be pushed every time.Data will be pushed every 200 ms when there is change in order book.<br />
+            OrderBookType.OrderBook_50_l2_TBT: 50 depth levels will be pushed in the initial full snapshot. Incremental data will be pushed tick by tick, i.e.whenever there is change in order book.<br />
+            OrderBookType.OrderBook_l2_TBT: 400 depth levels will be pushed in the initial full snapshot. Incremental data will be pushed tick by tick, i.e.whenever there is change in order book.
+            <para><a href="https://www.okx.com/docs-v5/en/#order-book-trading-market-data-ws-order-book-channel" /></para>
+            </summary>
+            <param name="symbols">Array of symbols, for example `BTC-USD`, `ETH-USD` </param>
+            <param name="orderBookType">Order Book Type</param>
+            <param name="onData">On Data Handler</param>
+            <param name="ct">Cancellation Token</param>
+            <returns></returns>
+        </member>
         <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXSocketClientUnifiedApiExchangeData.SubscribeToPriceLimitUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Public.OKXLimitPrice}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to the maximum buy price and minimum sell price of the instrument updates. Data will be pushed every 5 seconds when there are changes in limits, and will not be pushed when there is no changes on limit.
             <para><a href="https://www.okx.com/docs-v5/en/#public-data-websocket-price-limit-channel" /></para>
             </summary>
             <param name="symbol">Symbol, for example `ETH-USDT`</param>
+            <param name="onData">On Data Handler</param>
+            <param name="ct">Cancellation Token</param>
+            <returns></returns>
+        </member>
+        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXSocketClientUnifiedApiExchangeData.SubscribeToPriceLimitUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Public.OKXLimitPrice}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to the maximum buy price and minimum sell price of the instrument updates. Data will be pushed every 5 seconds when there are changes in limits, and will not be pushed when there is no changes on limit.
+            <para><a href="https://www.okx.com/docs-v5/en/#public-data-websocket-price-limit-channel" /></para>
+            </summary>
+            <param name="symbols">Array of symbols, for example `BTC-USD`, `ETH-USD` </param>
             <param name="onData">On Data Handler</param>
             <param name="ct">Cancellation Token</param>
             <returns></returns>
@@ -5653,7 +5969,7 @@
             Subscribe to the last traded price updates, bid price, ask price and 24-hour trading volume of instruments. Data will be pushed every 100 ms.
             <para><a href="https://www.okx.com/docs-v5/en/#order-book-trading-market-data-ws-tickers-channel" /></para>
             </summary>
-            <param name="symbols">Symbol, for example `ETH-USDT`</param>
+            <param name="symbols">Array of symbols, for example `BTC-USD`, `ETH-USD` </param>
             <param name="onData">On Data Handler</param>
             <param name="ct">Cancellation Token</param>
             <returns></returns>
@@ -5664,6 +5980,16 @@
             <para><a href="https://www.okx.com/docs-v5/en/#order-book-trading-market-data-ws-trades-channel" /></para>
             </summary>
             <param name="symbol">Symbol, for example `ETH-USDT`</param>
+            <param name="onData">On Data Handler</param>
+            <param name="ct">Cancellation Token</param>
+            <returns></returns>
+        </member>
+        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXSocketClientUnifiedApiExchangeData.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{OKX.Net.Objects.Market.OKXTrade}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to the recent trades data updates. Data will be pushed whenever there is a trade.
+            <para><a href="https://www.okx.com/docs-v5/en/#order-book-trading-market-data-ws-trades-channel" /></para>
+            </summary>
+            <param name="symbols">Array of symbols, for example `BTC-USD`, `ETH-USD` </param>
             <param name="onData">On Data Handler</param>
             <param name="ct">Cancellation Token</param>
             <returns></returns>
@@ -5748,7 +6074,7 @@
             <param name="ct">Cancellation Token</param>
             <returns></returns>
         </member>
-        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXSocketClientUnifiedApiTrading.PlaceOrderAsync(System.String,OKX.Net.Enums.OrderSide,OKX.Net.Enums.OrderType,OKX.Net.Enums.TradeMode,System.Decimal,System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.PositionSide},System.Nullable{OKX.Net.Enums.QuickMarginType},System.Nullable{System.Int32},System.Nullable{OKX.Net.Enums.SelfTradePreventionMode},System.String,System.Nullable{OKX.Net.Enums.QuantityAsset},System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+        <member name="M:OKX.Net.Interfaces.Clients.UnifiedApi.IOKXSocketClientUnifiedApiTrading.PlaceOrderAsync(System.String,OKX.Net.Enums.OrderSide,OKX.Net.Enums.OrderType,OKX.Net.Enums.TradeMode,System.Decimal,System.Nullable{System.Decimal},System.Nullable{OKX.Net.Enums.PositionSide},System.Nullable{OKX.Net.Enums.QuickMarginType},System.Nullable{System.Int32},System.Nullable{OKX.Net.Enums.SelfTradePreventionMode},System.String,System.Nullable{OKX.Net.Enums.QuantityAsset},System.String,System.Nullable{System.Boolean},System.String,System.Threading.CancellationToken)">
             <summary>
             Place a new order
             <para><a href="https://www.okx.com/docs-v5/en/#order-book-trading-trade-ws-place-order" /></para>
@@ -5767,6 +6093,7 @@
             <param name="selfTradePreventionId">Self trade prevention id</param>
             <param name="selfTradePreventionMode">Self trade prevention mode</param>
             <param name="quantityAsset">Asset of the quantity when placing market order</param>
+            <param name="tradeQuoteAsset">The quote currency used for trading. Only applicable to SPOT. The default value is the quote currency of the symbol, for example: for BTC-USD, the default is USD.</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -5852,25 +6179,6 @@
             <summary>
             Tracker factory
             </summary>
-        </member>
-        <member name="M:OKX.Net.Interfaces.IOKXTrackerFactory.CreateKlineTracker(CryptoExchange.Net.SharedApis.SharedSymbol,CryptoExchange.Net.SharedApis.SharedKlineInterval,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
-            <summary>
-            Create a new kline tracker
-            </summary>
-            <param name="symbol">The symbol</param>
-            <param name="interval">Kline interval</param>
-            <param name="limit">The max amount of klines to retain</param>
-            <param name="period">The max period the data should be retained</param>
-            <returns></returns>
-        </member>
-        <member name="M:OKX.Net.Interfaces.IOKXTrackerFactory.CreateTradeTracker(CryptoExchange.Net.SharedApis.SharedSymbol,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
-            <summary>
-            Create a new trade tracker for a symbol
-            </summary>
-            <param name="symbol">The symbol</param>
-            <param name="limit">The max amount of klines to retain</param>
-            <param name="period">The max period the data should be retained</param>
-            <returns></returns>
         </member>
         <member name="T:OKX.Net.Objects.Account.OKXAccountBalance">
             <summary>
@@ -6152,9 +6460,9 @@
             Collateral enabled for multi-currency margin
             </summary>
         </member>
-        <member name="P:OKX.Net.Objects.Account.OKXAccountBalanceDetail.CollateralRestricted">
+        <member name="P:OKX.Net.Objects.Account.OKXAccountBalanceDetail.CollateralRestrictionStatus">
             <summary>
-            Platform level collateralized borrow restriction
+            Collateral restriction status
             </summary>
         </member>
         <member name="T:OKX.Net.Objects.Account.OKXAccountBill">
@@ -6322,6 +6630,16 @@
             Last fill time
             </summary>
         </member>
+        <member name="P:OKX.Net.Objects.Account.OKXAccountBill.EarnQuantity">
+            <summary>
+            Earn quantity
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.Account.OKXAccountBill.EarnApr">
+            <summary>
+            Earn APR
+            </summary>
+        </member>
         <member name="T:OKX.Net.Objects.Account.OKXAccountConfiguration">
             <summary>
             Account config
@@ -6440,6 +6758,21 @@
         <member name="P:OKX.Net.Objects.Account.OKXAccountConfiguration.AccountType">
             <summary>
             Account type
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.Account.OKXAccountConfiguration.FeeType">
+            <summary>
+            Spot fee charging type
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.Account.OKXAccountConfiguration.SettleAsset">
+            <summary>
+            The settlement asset for USD contracts
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.Account.OKXAccountConfiguration.SettleAssetList">
+            <summary>
+            Available settlement assets for USD contracts
             </summary>
         </member>
         <member name="T:OKX.Net.Objects.Account.OKXAccountGreeksType">
@@ -7005,6 +7338,16 @@
         <member name="P:OKX.Net.Objects.Account.OKXFiatFee.MakerFeeRate">
             <summary>
             Maker fee
+            </summary>
+        </member>
+        <member name="T:OKX.Net.Objects.Account.OKXFeeType">
+            <summary>
+            Fee type
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.Account.OKXFeeType.FeeType">
+            <summary>
+            Fee type
             </summary>
         </member>
         <member name="T:OKX.Net.Objects.Account.OKXInterestAccrued">
@@ -7822,6 +8165,16 @@
             Risk offset type
             </summary>
         </member>
+        <member name="T:OKX.Net.Objects.Account.OKXSettleAsset">
+            <summary>
+            Settlement asset
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.Account.OKXSettleAsset.SettleAsset">
+            <summary>
+            Settlement asset
+            </summary>
+        </member>
         <member name="T:OKX.Net.Objects.Account.OKXWithdrawalAmount">
             <summary>
             Withdrawal info
@@ -7917,14 +8270,140 @@
             Affiliate code
             </summary>
         </member>
-        <member name="T:OKX.Net.Objects.Core.OKXRestApiError">
+        <member name="T:OKX.Net.Objects.CopyTrading.OKXCopyTradingAccount">
             <summary>
-            API error
+            Copy trading account info
             </summary>
         </member>
-        <member name="M:OKX.Net.Objects.Core.OKXRestApiError.#ctor(System.Nullable{System.Int32},System.String,System.Exception)">
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCopyTradingAccount.UniqueCode">
             <summary>
-            ctor
+            User unique code
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCopyTradingAccount.NickName">
+            <summary>
+            Nickname
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCopyTradingAccount.PortraitLink">
+            <summary>
+            Portrait link
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCopyTradingAccount.Details">
+            <summary>
+            Details
+            </summary>
+        </member>
+        <member name="T:OKX.Net.Objects.CopyTrading.OKXCopyTradingAccountDetails">
+            <summary>
+            Copy trading account details
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCopyTradingAccountDetails.InstrumentType">
+            <summary>
+            Instrument type
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCopyTradingAccountDetails.RoleType">
+            <summary>
+            Role type
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCopyTradingAccountDetails.ProfitSharingRatio">
+            <summary>
+            Profit sharing ratio.
+            Only applicable to lead trader, or it will be "". 0.1 represents 10%
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCopyTradingAccountDetails.MaximumCopyTraderNumber">
+            <summary>
+            Maximum number of copy traders
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCopyTradingAccountDetails.NumberOfCopyTraders">
+            <summary>
+            Current number of copy traders
+            </summary>
+        </member>
+        <member name="T:OKX.Net.Objects.CopyTrading.OKXCurrentSubposition">
+            <summary>
+            Lead trader current lead position
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCurrentSubposition.Asset">
+            <summary>
+            Currency
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCurrentSubposition.Symbol">
+            <summary>
+            Instrument ID, e.g. BTC-USDT-SWAP
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCurrentSubposition.InstrumentType">
+            <summary>
+            Instrument type
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCurrentSubposition.Leverage">
+            <summary>
+            Leverage
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCurrentSubposition.Margin">
+            <summary>
+            Margin
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCurrentSubposition.MarkPrice">
+            <summary>
+            Latest mark price, only applicable to contract
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCurrentSubposition.MarginMode">
+            <summary>
+            Margin mode. cross isolated
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCurrentSubposition.OpenAveragePrice">
+            <summary>
+            Average open price
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCurrentSubposition.OpenTimestamp">
+            <summary>
+            Open time
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCurrentSubposition.PositionSide">
+            <summary>
+            Position side
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCurrentSubposition.Quantity">
+            <summary>
+            Quantity of positions
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCurrentSubposition.PositionId">
+            <summary>
+            Lead position ID
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCurrentSubposition.UniqueCode">
+            <summary>
+            Lead trader unique code
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCurrentSubposition.UnrealizedPnl">
+            <summary>
+            Unrealized profit and loss
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.CopyTrading.OKXCurrentSubposition.UnrealizedProfitAndLossRatio">
+            <summary>
+            Unrealized profit and loss ratio
             </summary>
         </member>
         <member name="T:OKX.Net.Objects.Core.OKXRestApiResponse">
@@ -8376,6 +8855,11 @@
         <member name="P:OKX.Net.Objects.Funding.OKXFundingBill.ClientId">
             <summary>
             Client id
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.Funding.OKXFundingBill.Notes">
+            <summary>
+            Notes
             </summary>
         </member>
         <member name="T:OKX.Net.Objects.Funding.OKXLightningDeposit">
@@ -9316,16 +9800,6 @@
             OKX options
             </summary>
         </member>
-        <member name="P:OKX.Net.Objects.Options.OKXOptions.AllowAppendingClientOrderId">
-            <summary>
-            Whether to allow the client to adjust the clientOrderId parameter send by the user when placing orders to include a client reference. This reference is used by the exchange to allocate a small percentage of the paid trading fees to developer of this library. Defaults to false.<br />
-            Note that:<br />
-            * It does not impact the amount of fees a user pays in any way<br />
-            * It does not impact functionality. The reference is added just before sending the request and removed again during data deserialization<br />
-            * It does respect client order id field limitations. For example if the user provided client order id parameter is too long to fit the reference it will not be added<br />
-            * Toggling this option might fail operations using a clientOrderId parameter for pre-existing orders which were placed before the toggle. Operations on orders placed after the toggle will work as expected. It's adviced to toggle when there are no open orders
-            </summary>
-        </member>
         <member name="T:OKX.Net.Objects.Options.OKXOrderBookOptions">
             <summary>
             Order book options
@@ -9366,14 +9840,9 @@
             Whether or not to sign public requests
             </summary>
         </member>
-        <member name="P:OKX.Net.Objects.Options.OKXRestOptions.AllowAppendingClientOrderId">
+        <member name="P:OKX.Net.Objects.Options.OKXRestOptions.BrokerId">
             <summary>
-            Whether to allow the client to adjust the clientOrderId parameter send by the user when placing orders to include a client reference. This reference is used by the exchange to allocate a small percentage of the paid trading fees to developer of this library. Defaults to false.<br />
-            Note that:<br />
-            * It does not impact the amount of fees a user pays in any way<br />
-            * It does not impact functionality. The reference is added just before sending the request and removed again during data deserialization<br />
-            * It does respect client order id field limitations. For example if the user provided client order id parameter is too long to fit the reference it will not be added<br />
-            * Toggling this option might fail operations using a clientOrderId parameter for pre-existing orders which were placed before the toggle. Operations on orders placed after the toggle will work as expected. It's adviced to toggle when there are no open orders
+            Broker id
             </summary>
         </member>
         <member name="P:OKX.Net.Objects.Options.OKXRestOptions.UnifiedOptions">
@@ -9396,14 +9865,9 @@
             ctor
             </summary>
         </member>
-        <member name="P:OKX.Net.Objects.Options.OKXSocketOptions.AllowAppendingClientOrderId">
+        <member name="P:OKX.Net.Objects.Options.OKXSocketOptions.BrokerId">
             <summary>
-            Whether to allow the client to adjust the clientOrderId parameter send by the user when placing orders to include a client reference. This reference is used by the exchange to allocate a small percentage of the paid trading fees to developer of this library. Defaults to false.<br />
-            Note that:<br />
-            * It does not impact the amount of fees a user pays in any way<br />
-            * It does not impact functionality. The reference is added just before sending the request and removed again during data deserialization<br />
-            * It does respect client order id field limitations. For example if the user provided client order id parameter is too long to fit the reference it will not be added<br />
-            * Toggling this option might fail operations using a clientOrderId parameter for pre-existing orders which were placed before the toggle. Operations on orders placed after the toggle will work as expected. It's adviced to toggle when there are no open orders
+            Broker id
             </summary>
         </member>
         <member name="P:OKX.Net.Objects.Options.OKXSocketOptions.UnifiedOptions">
@@ -9516,9 +9980,9 @@
             Interest-free quota
             </summary>
         </member>
-        <member name="P:OKX.Net.Objects.Public.OKXDiscountInfo.CollateralRestricted">
+        <member name="P:OKX.Net.Objects.Public.OKXDiscountInfo.CollateralRestrictionStatus">
             <summary>
-            Platform level collateralized borrow restriction
+            Collateral restriction status
             </summary>
         </member>
         <member name="P:OKX.Net.Objects.Public.OKXDiscountInfo.DiscountLevel">
@@ -9924,6 +10388,36 @@
         <member name="P:OKX.Net.Objects.Public.OKXInstrument.OpenType">
             <summary>
             Open type, only applicable to SPOT/MARGIN
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.Public.OKXInstrument.TradeQuoteAssetList">
+            <summary>
+            Trade quote asset list
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.Public.OKXInstrument.SymbolCode">
+            <summary>
+            Symbol code
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.Public.OKXInstrument.PreMarketSwitchTime">
+            <summary>
+            Timestamp the market is switched from pre-market mode to normal mode
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.Public.OKXInstrument.PositionLimitQuantity">
+            <summary>
+            Maximum position value (USD) for this instrument at the user level, based on the notional value of all same-direction open positions and resting orders. The effective user limit is max(posLmtAmt, oiUSD × posLmtPct). Applicable to SWAP/FUTURES.
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.Public.OKXInstrument.PositionLimitPercentage">
+            <summary>
+            Maximum position ratio (e.g., 30 for 30%) a user may hold relative to the platform’s current total position value. The effective user limit is max(posLmtAmt, oiUSD × posLmtPct). Applicable to SWAP/FUTURES.
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.Public.OKXInstrument.PositionPlatformLimitQuantity">
+            <summary>
+            Platform-wide maximum position value (USD) for this instrument. If the global position limit switch is enabled and platform total open interest reaches or exceeds this value, all users’ new opening orders for this instrument are rejected; otherwise, orders pass.
             </summary>
         </member>
         <member name="T:OKX.Net.Objects.Public.OKXInsuranceFund">
@@ -11046,6 +11540,11 @@
             Max chase value
             </summary>
         </member>
+        <member name="P:OKX.Net.Objects.Trade.OKXAlgoOrder.TradeQuoteAsset">
+            <summary>
+            Trade quote asset
+            </summary>
+        </member>
         <member name="T:OKX.Net.Objects.Trade.OKXAlgoOrderAmendResponse">
             <summary>
             Order amend response
@@ -11608,12 +12107,17 @@
         </member>
         <member name="P:OKX.Net.Objects.Trade.OKXOrder.ImpliedVolatility">
             <summary>
-            Implied volatiltiy for options
+            Implied volatility for options
             </summary>
         </member>
         <member name="P:OKX.Net.Objects.Trade.OKXOrder.LastPrice">
             <summary>
             Last price
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.Trade.OKXOrder.TradeQuoteAsset">
+            <summary>
+            Trade quote asset
             </summary>
         </member>
         <member name="T:OKX.Net.Objects.Trade.OKXOrderAmendRequest">
@@ -11826,7 +12330,7 @@
             Place options orders based on implied volatility, where 1 represents 100%. Only applicable to OPTIONS
             </summary>
         </member>
-        <member name="P:OKX.Net.Objects.Trade.OKXOrderPlaceRequest.BanAmmend">
+        <member name="P:OKX.Net.Objects.Trade.OKXOrderPlaceRequest.BanAmend">
             <summary>
             Whether to disallow the system from amending the size of the SPOT Market Order. If true, system will not amend and reject the market order if user does not have sufficient funds.
             </summary>
@@ -11834,6 +12338,11 @@
         <member name="P:OKX.Net.Objects.Trade.OKXOrderPlaceRequest.StpMode">
             <summary>
             Self trade prevention mode
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.Trade.OKXOrderPlaceRequest.TradeQuoteAsset">
+            <summary>
+            The quote currency used for trading. Only applicable to SPOT. The default value is the quote currency of the symbol, for example: for BTC-USD, the default is USD.
             </summary>
         </member>
         <member name="P:OKX.Net.Objects.Trade.OKXOrderPlaceRequest.AttachedAlgoOrders">
@@ -12081,6 +12590,11 @@
         <member name="P:OKX.Net.Objects.Trade.OKXTransaction.TransactionType">
             <summary>
             Transaction type
+            </summary>
+        </member>
+        <member name="P:OKX.Net.Objects.Trade.OKXTransaction.TradeQuoteAsset">
+            <summary>
+            Quote asset
             </summary>
         </member>
         <member name="T:OKX.Net.Objects.Trade.OKXUserTradeUpdate">
@@ -12433,6 +12947,11 @@
             Type of exchange
             </summary>
         </member>
+        <member name="P:OKX.Net.OKXExchange.AssetAliases">
+            <summary>
+            Aliases for OKX assets
+            </summary>
+        </member>
         <member name="M:OKX.Net.OKXExchange.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <summary>
             Format a base and quote asset to an OKX recognized symbol 
@@ -12477,6 +12996,12 @@
             </summary>
             <param name="serviceProvider">Service provider for resolving logging and clients</param>
         </member>
+        <member name="M:OKX.Net.OKXTrackerFactory.CanCreateKlineTracker(CryptoExchange.Net.SharedApis.SharedSymbol,CryptoExchange.Net.SharedApis.SharedKlineInterval)">
+            <inheritdoc />
+        </member>
+        <member name="M:OKX.Net.OKXTrackerFactory.CanCreateTradeTracker(CryptoExchange.Net.SharedApis.SharedSymbol)">
+            <inheritdoc />
+        </member>
         <member name="M:OKX.Net.OKXTrackerFactory.CreateKlineTracker(CryptoExchange.Net.SharedApis.SharedSymbol,CryptoExchange.Net.SharedApis.SharedKlineInterval,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
             <inheritdoc />
         </member>
@@ -12484,6 +13009,9 @@
             <inheritdoc />
         </member>
         <member name="T:OKX.Net.SymbolOrderBooks.OKXOrderBookFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:OKX.Net.SymbolOrderBooks.OKXOrderBookFactory.ExchangeName">
             <inheritdoc />
         </member>
         <member name="P:OKX.Net.SymbolOrderBooks.OKXOrderBookFactory.Unified">

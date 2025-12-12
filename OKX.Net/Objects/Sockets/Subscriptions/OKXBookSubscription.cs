@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Objects.Sockets;
+﻿using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 using OKX.Net.Objects.Market;
 using OKX.Net.Objects.Sockets.Models;
@@ -7,45 +8,42 @@ using OKX.Net.Objects.Sockets.Queries;
 namespace OKX.Net.Objects.Sockets.Subscriptions;
 internal class OKXBookSubscription : Subscription<OKXSocketResponse, OKXSocketResponse>
 {
+    private readonly SocketApiClient _client;
     private List<OKXSocketArgs> _args;
     private Action<DataEvent<OKXOrderBook>> _handler;
 
-    public override HashSet<string> ListenerIdentifiers { get; set; }
-
-    public OKXBookSubscription(ILogger logger, List<OKXSocketArgs> args, Action<DataEvent<OKXOrderBook>> handler, bool authenticated) : base(logger, authenticated)
+    public OKXBookSubscription(ILogger logger, SocketApiClient client, List<OKXSocketArgs> args, Action<DataEvent<OKXOrderBook>> handler, bool authenticated) : base(logger, authenticated)
     {
+        _client = client;
         _args = args;
         _handler = handler;
 
-        ListenerIdentifiers = new HashSet<string>(args.Select(x => x.Channel.ToLowerInvariant() + x.InstrumentType?.ToString().ToLowerInvariant() + x.InstrumentFamily?.ToString().ToLowerInvariant() + x.Symbol?.ToLowerInvariant()));
+        MessageMatcher = MessageMatcher.Create<OKXSocketUpdate<OKXOrderBook[]>>(args.Select(x => x.Channel.ToLowerInvariant() + x.InstrumentType?.ToString().ToLowerInvariant() + x.InstrumentFamily?.ToString().ToLowerInvariant() + x.Symbol?.ToLowerInvariant()), DoHandleMessage);
     }
 
-    public override Query? GetSubQuery(SocketConnection connection)
+    protected override Query? GetSubQuery(SocketConnection connection)
     {
-        return new OKXQuery(new OKXSocketRequest
+        return new OKXQuery(_client, new OKXSocketRequest
         {
             Op = "subscribe",
             Args = _args
         }, false);
     }
 
-    public override Query? GetUnsubQuery()
+    protected override Query? GetUnsubQuery(SocketConnection connection)
     {
-        return new OKXQuery(new OKXSocketRequest
+        return new OKXQuery(_client, new OKXSocketRequest
         {
             Op = "unsubscribe",
             Args = _args
         }, false);
     }
 
-    public override Type? GetMessageType(IMessageAccessor message) => typeof(OKXSocketUpdate<OKXOrderBook[]>);
-
-    public override CallResult DoHandleMessage(SocketConnection connection, DataEvent<object> message)
+    public CallResult DoHandleMessage(SocketConnection connection, DataEvent<OKXSocketUpdate<OKXOrderBook[]>> message)
     {
-        var data = (OKXSocketUpdate<OKXOrderBook[]>)message.Data;
-        foreach (var item in data.Data)
-            item.Action = data.Action!;
-        _handler.Invoke(message.As(data.Data.Single(), data.Arg.Channel, data.Arg.Symbol, string.Equals(data.Action, "snapshot", StringComparison.Ordinal) || data.Action == null ? SocketUpdateType.Snapshot : SocketUpdateType.Update));
+        foreach (var item in message.Data.Data)
+            item.Action = message.Data.Action!;
+        _handler.Invoke(message.As(message.Data.Data.Single(), message.Data.Arg.Channel, message.Data.Arg.Symbol, string.Equals(message.Data.Action, "snapshot", StringComparison.Ordinal) || message.Data.Action == null ? SocketUpdateType.Snapshot : SocketUpdateType.Update));
         return CallResult.SuccessResult;
     }
 }

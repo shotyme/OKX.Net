@@ -188,10 +188,12 @@ public interface IOKXRestClientUnifiedApiAccount
     /// <param name="startTime">Pagination of data to return records earlier than the requested ts</param>
     /// <param name="endTime">Pagination of data to return records newer than the requested ts</param>
     /// <param name="limit">Number of results per request. The maximum is 100; the default is 100.</param>
+    /// <param name="startBillId">Filter by start bill id</param>
+    /// <param name="endBillId">Filter by end bill id</param>
     /// <param name="clientId">Client id</param>
     /// <param name="ct">Cancellation Token</param>
     /// <returns></returns>
-    Task<WebCallResult<OKXFundingBill[]>> GetFundingBillDetailsAsync(string? asset = null, FundingBillType? type = null, DateTime? endTime = null, DateTime? startTime = null, int limit = 100, string? clientId = null, CancellationToken ct = default);
+    Task<WebCallResult<OKXFundingBill[]>> GetFundingBillDetailsAsync(string? asset = null, FundingBillType? type = null, DateTime? endTime = null, DateTime? startTime = null, int limit = 100, string? clientId = null, long? startBillId = null, long? endBillId = null, CancellationToken ct = default);
 
     /// <summary>
     /// Get interest-accrued
@@ -247,9 +249,17 @@ public interface IOKXRestClientUnifiedApiAccount
     /// <param name="asset">Asset</param>
     /// <param name="price">Price</param>
     /// <param name="leverage">Leverage</param>
+    /// <param name="tradeQuoteAsset">The quote currency used for trading. Only applicable to SPOT. The default value is the quote currency of the symbol, for example: for BTC-USD, the default is USD.</param>
     /// <param name="ct">Cancellation Token</param>
     /// <returns></returns>
-    Task<WebCallResult<OKXMaximumAmount[]>> GetMaximumAmountAsync(string symbol, Enums.TradeMode tradeMode, string? asset = null, decimal? price = null, int? leverage = null, CancellationToken ct = default);
+    Task<WebCallResult<OKXMaximumAmount[]>> GetMaximumAmountAsync(
+        string symbol,
+        Enums.TradeMode tradeMode,
+        string? asset = null,
+        decimal? price = null, 
+        int? leverage = null,
+        string? tradeQuoteAsset = null,
+        CancellationToken ct = default);
 
     /// <summary>
     /// Get Maximum Available Tradable Amount
@@ -259,9 +269,16 @@ public interface IOKXRestClientUnifiedApiAccount
     /// <param name="tradeMode">Trade Mode</param>
     /// <param name="asset">Currency</param>
     /// <param name="reduceOnly">Reduce Only</param>
+    /// <param name="tradeQuoteAsset">The quote currency used for trading. Only applicable to SPOT. The default value is the quote currency of the symbol, for example: for BTC-USD, the default is USD.</param>
     /// <param name="ct">Cancellation Token</param>
     /// <returns></returns>
-    Task<WebCallResult<OKXMaximumAvailableAmount[]>> GetMaximumAvailableAmountAsync(string symbol, Enums.TradeMode tradeMode, string? asset = null, bool? reduceOnly = null, CancellationToken ct = default);
+    Task<WebCallResult<OKXMaximumAvailableAmount[]>> GetMaximumAvailableAmountAsync(
+        string symbol,
+        Enums.TradeMode tradeMode,
+        string? asset = null,
+        bool? reduceOnly = null, 
+        string? tradeQuoteAsset = null,
+        CancellationToken ct = default);
 
     /// <summary>
     /// Get the maximum loan of a instrument
@@ -543,4 +560,19 @@ public interface IOKXRestClientUnifiedApiAccount
     /// <param name="ct">Cancellation Token</param>
     Task<WebCallResult<Objects.Public.OKXInstrument[]>> GetSymbolsAsync(InstrumentType instrumentType, string? underlying = null, string? symbol = null, string? instrumentFamily = null, CancellationToken ct = default);
 
+    /// <summary>
+    /// Set fee charge type for spot trading
+    /// <para><a href="https://www.okx.com/docs-v5/en/#trading-account-rest-api-set-fee-type" /></para>
+    /// </summary>
+    /// <param name="feeType">Fee type</param>
+    /// <param name="ct">Cancellation Token</param>
+    Task<WebCallResult<OKXFeeType>> SetFeeTypeAsync(FeeType feeType, CancellationToken ct = default);
+
+    /// <summary>
+    /// Set settlement asset for USD contracts
+    /// <para><a href="https://www.okx.com/docs-v5/en/#trading-account-rest-api-set-settle-currency" /></para>
+    /// </summary>
+    /// <param name="settleAsset">The settlement asset</param>
+    /// <param name="ct">Cancellation Token</param>
+    Task<WebCallResult<OKXSettleAsset>> SetSettleAssetAsync(string settleAsset, CancellationToken ct = default);
 }

@@ -89,16 +89,19 @@ CryptoExchange.Net also allows for [easy access to different exchange API's](htt
 
 |Exchange|Repository|Nuget|
 |--|--|--|
+|Aster|[JKorf/Aster.Net](https://github.com/JKorf/Aster.Net)|[![Nuget version](https://img.shields.io/nuget/v/JKorf.Aster.net.svg?style=flat-square)](https://www.nuget.org/packages/JKorf.Aster.Net)|
 |Binance|[JKorf/Binance.Net](https://github.com/JKorf/Binance.Net)|[![Nuget version](https://img.shields.io/nuget/v/Binance.net.svg?style=flat-square)](https://www.nuget.org/packages/Binance.Net)|
 |BingX|[JKorf/BingX.Net](https://github.com/JKorf/BingX.Net)|[![Nuget version](https://img.shields.io/nuget/v/JK.BingX.net.svg?style=flat-square)](https://www.nuget.org/packages/JK.BingX.Net)|
 |Bitfinex|[JKorf/Bitfinex.Net](https://github.com/JKorf/Bitfinex.Net)|[![Nuget version](https://img.shields.io/nuget/v/Bitfinex.net.svg?style=flat-square)](https://www.nuget.org/packages/Bitfinex.Net)|
 |Bitget|[JKorf/Bitget.Net](https://github.com/JKorf/Bitget.Net)|[![Nuget version](https://img.shields.io/nuget/v/JK.Bitget.net.svg?style=flat-square)](https://www.nuget.org/packages/JK.Bitget.Net)|
 |BitMart|[JKorf/BitMart.Net](https://github.com/JKorf/BitMart.Net)|[![Nuget version](https://img.shields.io/nuget/v/BitMart.net.svg?style=flat-square)](https://www.nuget.org/packages/BitMart.Net)|
 |BitMEX|[JKorf/BitMEX.Net](https://github.com/JKorf/BitMEX.Net)|[![Nuget version](https://img.shields.io/nuget/v/JKorf.BitMEX.net.svg?style=flat-square)](https://www.nuget.org/packages/JKorf.BitMEX.Net)|
+|BloFin|[JKorf/BloFin.Net](https://github.com/JKorf/BloFin.Net)|[![Nuget version](https://img.shields.io/nuget/v/BloFin.net.svg?style=flat-square)](https://www.nuget.org/packages/BloFin.Net)|
 |Bybit|[JKorf/Bybit.Net](https://github.com/JKorf/Bybit.Net)|[![Nuget version](https://img.shields.io/nuget/v/Bybit.net.svg?style=flat-square)](https://www.nuget.org/packages/Bybit.Net)|
 |Coinbase|[JKorf/Coinbase.Net](https://github.com/JKorf/Coinbase.Net)|[![Nuget version](https://img.shields.io/nuget/v/JKorf.Coinbase.Net.svg?style=flat-square)](https://www.nuget.org/packages/JKorf.Coinbase.Net)|
 |CoinEx|[JKorf/CoinEx.Net](https://github.com/JKorf/CoinEx.Net)|[![Nuget version](https://img.shields.io/nuget/v/CoinEx.net.svg?style=flat-square)](https://www.nuget.org/packages/CoinEx.Net)|
 |CoinGecko|[JKorf/CoinGecko.Net](https://github.com/JKorf/CoinGecko.Net)|[![Nuget version](https://img.shields.io/nuget/v/CoinGecko.net.svg?style=flat-square)](https://www.nuget.org/packages/CoinGecko.Net)|
+|CoinW|[JKorf/CoinW.Net](https://github.com/JKorf/CoinW.Net)|[![Nuget version](https://img.shields.io/nuget/v/CoinW.net.svg?style=flat-square)](https://www.nuget.org/packages/CoinW.Net)|
 |Crypto.com|[JKorf/CryptoCom.Net](https://github.com/JKorf/CryptoCom.Net)|[![Nuget version](https://img.shields.io/nuget/v/CryptoCom.net.svg?style=flat-square)](https://www.nuget.org/packages/CryptoCom.Net)|
 |DeepCoin|[JKorf/DeepCoin.Net](https://github.com/JKorf/DeepCoin.Net)|[![Nuget version](https://img.shields.io/nuget/v/DeepCoin.net.svg?style=flat-square)](https://www.nuget.org/packages/DeepCoin.Net)|
 |Gate.io|[JKorf/GateIo.Net](https://github.com/JKorf/GateIo.Net)|[![Nuget version](https://img.shields.io/nuget/v/GateIo.net.svg?style=flat-square)](https://www.nuget.org/packages/GateIo.Net)|
@@ -108,6 +111,7 @@ CryptoExchange.Net also allows for [easy access to different exchange API's](htt
 |Kucoin|[JKorf/Kucoin.Net](https://github.com/JKorf/Kucoin.Net)|[![Nuget version](https://img.shields.io/nuget/v/Kucoin.net.svg?style=flat-square)](https://www.nuget.org/packages/Kucoin.Net)|
 |Mexc|[JKorf/Mexc.Net](https://github.com/JKorf/Mexc.Net)|[![Nuget version](https://img.shields.io/nuget/v/JK.Mexc.net.svg?style=flat-square)](https://www.nuget.org/packages/JK.Mexc.Net)|
 |Toobit|[JKorf/Toobit.Net](https://github.com/JKorf/Toobit.Net)|[![Nuget version](https://img.shields.io/nuget/v/Toobit.net.svg?style=flat-square)](https://www.nuget.org/packages/Toobit.Net)|
+|Upbit|[JKorf/Upbit.Net](https://github.com/JKorf/Upbit.Net)|[![Nuget version](https://img.shields.io/nuget/v/JKorf.Upbit.net.svg?style=flat-square)](https://www.nuget.org/packages/JKorf.Upbit.Net)|
 |WhiteBit|[JKorf/WhiteBit.Net](https://github.com/JKorf/WhiteBit.Net)|[![Nuget version](https://img.shields.io/nuget/v/WhiteBit.net.svg?style=flat-square)](https://www.nuget.org/packages/WhiteBit.Net)|
 |XT|[JKorf/XT.Net](https://github.com/JKorf/XT.Net)|[![Nuget version](https://img.shields.io/nuget/v/XT.net.svg?style=flat-square)](https://www.nuget.org/packages/XT.Net)|
 
@@ -171,6 +175,93 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.11.1 - 25 Nov 2025
+    * Fixed deserialization issue in restClient.UnifiedApi.ExchangeData.GetSymbolsAsync
+
+* Version 3.11.0 - 11 Nov 2025
+    * Updated CryptoExchange.Net version to 9.13.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+
+* Version 3.10.0 - 03 Nov 2025
+    * Updated CryptoExchange.Net to version 9.12.0
+    * Added support for using SharedSymbol.UsdOrStable in Shared APIs
+    * Fixed exception when initial trade snapshot has no items in TradeTracker
+    * Removed some unhelpful verbose logs
+
+* Version 3.9.1 - 27 Oct 2025
+    * Added PositionLimitQuantity, PositionLimitPercentage and PositionPlatformLimitQuantity properties to OKXInstrument response model
+
+* Version 3.9.0 - 16 Oct 2025
+    * Updated CryptoExchange.Net version to 9.10.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added ClientOrderId mapping on SharedUserTrade models
+    * Added ITransferRestClient.TransferAsync implementation
+    * Updated SpotApi IBalanceRestClient.GetBalancesAsync to support funding wallet balance retrieval
+
+* Version 3.8.0 - 30 Sep 2025
+    * Updated CryptoExchange.Net version to 9.8.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added ITrackerFactory to TrackerFactory implementation
+    * Added ContractAddress mapping in Shared IAssetClient implementation
+    * Added restClient.UnifiedApi.Account.SetSettleAssetAsync endpoint
+    * Added SettleAsset and SettleAssetList peroperties to OKXAccountConfiguration response model
+    * Added restClient.UnifiedApi.Account.SetFeeTypeAsync endpoint
+    * Added FeeType property to OKXAccountConfiguration response model
+    * Added EarnQuantity and EarnApr properties to OKXAccountBill response model
+    * Updated restClient.UnifiedApi.Account.ManualBorrowRepayAsync ratelimit
+    * Fixed deserialization error GetSymbolsAsync in Demo environment
+
+* Version 3.7.1 - 10 Sep 2025
+    * Added socket system subscription for connection count message, resolving warning log
+    * Fixed fee in Shared socket order update being negative value
+
+* Version 3.7.0 - 01 Sep 2025
+    * Updated CryptoExchange.Net version to 9.7.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * HTTP REST requests will now use HTTP version 2.0 by default
+    * Updated restClient.UnifiedApi.Trading.CancelOrder response checking
+
+* Version 3.6.0 - 25 Aug 2025
+    * Updated CryptoExchange.Net version to 9.6.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added ClearUserClients method to user client provider
+    * Added socket authentication error response mapping
+
+* Version 3.5.1 - 21 Aug 2025
+    * Added additional mapping for unknown symbol and unauthorized websocket errors
+    * Updated GetKlineHistoryAsync limit max value from 100 to 300
+
+* Version 3.5.0 - 20 Aug 2025
+    * Updated CryptoExchange.Net to version 9.5.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added improved error parsing
+    * Added CollateralRestrictionStatus in favor of CollateralRestricted on OKXAccountBalance and OKXDiscountInfo model
+    * Added TradeQuoteAsset to OKXTransaction model
+    * Added lead trader current lead positions endpoint
+    * Updated rest request sending too prevent duplicate parameter serialization
+    * Removed unnecessary OKXRestApiError
+    * Fixed error responses not correctly getting logged as error
+
+* Version 3.4.0 - 04 Aug 2025
+    * Updated CryptoExchange.Net to version 9.4.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added support for multi-symbol Shared socket subscriptions
+    * Added CopyTrading endpoints
+    * Added support for Unified USD Orderbook, added tradeQuoteAsset parameters and response properties
+    * Added SymbolCode to OKXInstrument model
+
+* Version 3.3.1 - 25 Jul 2025
+    * Fixed serialization error in CancelMultipleOrdersAsync
+
+* Version 3.3.0 - 23 Jul 2025
+    * Updated CryptoExchange.Net to version 9.3.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Updated websocket message matching
+    * Added overloads for passing multiple symbols on relevant Subscribe methods in socketClient.UnifiedApi.ExchangeData
+
+* Version 3.2.1 - 16 Jul 2025
+    * Updated CryptoExchange.Net to version 9.2.1, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Fixed issue with websocket ping response parsing
+
+* Version 3.2.0 - 15 Jul 2025
+    * Updated CryptoExchange.Net to version 9.2.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added startBillId, endBillId parameters to restClient.UnifiedApi.AccountGetFundingBillDetailsAsync endpoint
+    * Added Notes property to OKXFundingBill response model
+    * Updated restClient.UnifiedApi.ExchangeData.GetFundingRateHistoryAsync limit parameter max value to 400
+    * Updated WithdrawalState enum
+
 * Version 3.1.1 - 13 Jun 2025
     * Fixed deserialization issue client.UnifiedApi.Account.GetAccountBalanceAsync endpoint
 

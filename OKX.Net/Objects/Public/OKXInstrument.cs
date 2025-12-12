@@ -1,6 +1,4 @@
-using CryptoExchange.Net.Converters.SystemTextJson;
 using OKX.Net.Enums;
-using System.Collections.Generic;
 
 namespace OKX.Net.Objects.Public;
 
@@ -208,4 +206,34 @@ public record OKXInstrument
     /// </summary>
     [JsonPropertyName("openType")]
     public OpenType? OpenType { get; set; }
+    /// <summary>
+    /// Trade quote asset list
+    /// </summary>
+    [JsonPropertyName("tradeQuoteCcyList")]
+    public string[] TradeQuoteAssetList { get; set; } = [];
+    /// <summary>
+    /// Symbol code
+    /// </summary>
+    [JsonPropertyName("instIdCode")]
+    public long? SymbolCode { get; set; }
+    /// <summary>
+    /// Timestamp the market is switched from pre-market mode to normal mode
+    /// </summary>
+    [JsonPropertyName("preMktSwTime")]
+    public DateTime? PreMarketSwitchTime { get; set; }
+    /// <summary>
+    /// Maximum position value (USD) for this instrument at the user level, based on the notional value of all same-direction open positions and resting orders. The effective user limit is max(posLmtAmt, oiUSD × posLmtPct). Applicable to SWAP/FUTURES.
+    /// </summary>
+    [JsonPropertyName("posLmtAmt")]
+    public decimal? PositionLimitQuantity { get; set; }
+    /// <summary>
+    /// Maximum position ratio (e.g., 30 for 30%) a user may hold relative to the platform’s current total position value. The effective user limit is max(posLmtAmt, oiUSD × posLmtPct). Applicable to SWAP/FUTURES.
+    /// </summary>
+    [JsonPropertyName("posLmtPct")]
+    public decimal? PositionLimitPercentage { get; set; }
+    /// <summary>
+    /// Platform-wide maximum position value (USD) for this instrument. If the global position limit switch is enabled and platform total open interest reaches or exceeds this value, all users’ new opening orders for this instrument are rejected; otherwise, orders pass.
+    /// </summary>
+    [JsonPropertyName("maxPlatOILmt")]
+    public decimal? PositionPlatformLimitQuantity { get; set; }
 }

@@ -2,6 +2,7 @@
 using OKX.Net.Clients.UnifiedApi;
 using OKX.Net.Objects.Account;
 using OKX.Net.Objects.Affiliate;
+using OKX.Net.Objects.CopyTrading;
 using OKX.Net.Objects.Core;
 using OKX.Net.Objects.Funding;
 using OKX.Net.Objects.Market;
@@ -14,6 +15,7 @@ using OKX.Net.Objects.Trading;
 
 namespace OKX.Net.Converters
 {
+    [JsonSerializable(typeof(OKXConnectionCount))]
     [JsonSerializable(typeof(OKXSocketResponse<OKXOrderPlaceResponse>))]
     [JsonSerializable(typeof(OKXSocketResponse<OKXOrderCancelResponse>))]
     [JsonSerializable(typeof(OKXSocketResponse<OKXOrderAmendResponse>))]
@@ -41,6 +43,8 @@ namespace OKX.Net.Converters
     [JsonSerializable(typeof(OKXSocketUpdate<OKXAlgoOrderUpdate[]>))]
     [JsonSerializable(typeof(OKXRestApiResponse<OKXSettlementPrice[]>))]
     [JsonSerializable(typeof(OKXRestApiResponse<OKXSettlementInfo[]>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXFeeType[]>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXSettleAsset[]>))]
 
     // End manual defined attributes
 
@@ -143,6 +147,8 @@ namespace OKX.Net.Converters
     [JsonSerializable(typeof(OKXRestApiResponse<OKXIndexComponents>))]
     [JsonSerializable(typeof(OKXRestApiResponse<OKXSupportCoins>))]
     [JsonSerializable(typeof(OKXRestApiResponse<OKXTakerFlow>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXCopyTradingAccount[]>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXCurrentSubposition[]>))]
     [JsonSerializable(typeof(IDictionary<string, object>))]
     [JsonSerializable(typeof(OKXMiniKline[]))]
     [JsonSerializable(typeof(OKXAccountBalanceDetail[]))]

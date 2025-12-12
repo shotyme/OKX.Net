@@ -38,7 +38,6 @@ public record OKXTransaction
     /// Client order id
     /// </summary>
     [JsonPropertyName("clOrdId")]
-    [JsonConverter(typeof(OKXClientIdConverter))]
     public string? ClientOrderId { get; set; }
 
     /// <summary>
@@ -154,4 +153,10 @@ public record OKXTransaction
     /// </summary>
     [JsonPropertyName("subType")]
     public string TransactionType { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Quote asset
+    /// </summary>
+    [JsonPropertyName("tradeQuoteCcy")]
+    public string TradeQuoteAsset { get; set; } = string.Empty;
 }

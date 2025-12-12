@@ -45,7 +45,19 @@ namespace OKX.Net
         internal const string ClientOrderId = "c84128021aecBCDE";
         internal const string ClientOrderIdPrefix = ClientOrderId + LibraryHelpers.ClientOrderIdSeparator;
 
+
         internal static JsonSerializerContext _serializerContext = JsonSerializerContextCache.GetOrCreate<OKXSourceGenerationContext>();
+
+        /// <summary>
+        /// Aliases for OKX assets
+        /// </summary>
+        public static AssetAliasConfiguration AssetAliases { get; } = new AssetAliasConfiguration
+        {
+            Aliases =
+            [
+                new AssetAlias("USDT", SharedSymbol.UsdOrStable.ToUpperInvariant(), AliasType.OnlyToExchange)
+            ]
+        };
 
         /// <summary>
         /// Format a base and quote asset to an OKX recognized symbol 
@@ -57,13 +69,16 @@ namespace OKX.Net
         /// <returns></returns>
         public static string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
         {
+            baseAsset = AssetAliases.CommonToExchangeName(baseAsset.ToUpperInvariant());
+            quoteAsset = AssetAliases.CommonToExchangeName(quoteAsset.ToUpperInvariant());
+
             if (tradingMode == TradingMode.Spot)
-                return baseAsset.ToUpperInvariant() + "-" + quoteAsset.ToUpperInvariant();
+                return baseAsset + "-" + quoteAsset;
 
             if (deliverTime == null)
-                return baseAsset.ToUpperInvariant() + "-" + quoteAsset.ToUpperInvariant() + "-SWAP";
+                return baseAsset + "-" + quoteAsset + "-SWAP";
 
-            return baseAsset.ToUpperInvariant() + "-" + quoteAsset.ToUpperInvariant() + "-" + deliverTime.Value.ToString("yyMMdd");
+            return baseAsset + "-" + quoteAsset + "-" + deliverTime.Value.ToString("yyMMdd");
         }
 
         /// <summary>

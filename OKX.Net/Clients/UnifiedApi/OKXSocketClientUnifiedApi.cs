@@ -1,5 +1,6 @@
 ﻿using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
@@ -8,6 +9,7 @@ using OKX.Net.Objects;
 using OKX.Net.Objects.Options;
 using OKX.Net.Objects.Sockets.Models;
 using OKX.Net.Objects.Sockets.Queries;
+using OKX.Net.Objects.Sockets.Subscriptions;
 using System.IO;
 using System.IO.Compression;
 using System.Net.WebSockets;
@@ -27,6 +29,8 @@ internal partial class OKXSocketClientUnifiedApi : SocketApiClient, IOKXSocketCl
 
     public new OKXSocketOptions ClientOptions => (OKXSocketOptions)base.ClientOptions;
 
+    protected override ErrorMapping ErrorMapping => OKXErrors.ErrorMapping;
+
     /// <inheritdoc />
     public IOKXSocketClientUnifiedApiAccount Account { get; }
     /// <inheritdoc />
@@ -45,7 +49,11 @@ internal partial class OKXSocketClientUnifiedApi : SocketApiClient, IOKXSocketCl
         ExchangeData = new OKXSocketClientUnifiedApiExchangeData(logger, this);
         Trading = new OKXSocketClientUnifiedApiTrading(logger, this);
 
+        ProcessUnparsableMessages = true;
+
         _demoTrading = options.Environment.Name == TradeEnvironmentNames.Testnet;
+
+        AddSystemSubscription(new OKXConnCountSubscription(_logger));
 
         RegisterPeriodicQuery(
             "Ping",
@@ -53,7 +61,7 @@ internal partial class OKXSocketClientUnifiedApi : SocketApiClient, IOKXSocketCl
             x => new OKXPingQuery(),
             (connection, result) =>
             {
-                if (result.Error?.Message.Equals("Query timeout") == true)
+                if (result.Error?.ErrorType == ErrorType.Timeout)
                 {
                     // Ping timeout, reconnect
                     _logger.LogWarning("[Sckt {SocketId}] Ping response timeout, reconnecting", connection.SocketId);
@@ -68,7 +76,7 @@ internal partial class OKXSocketClientUnifiedApi : SocketApiClient, IOKXSocketCl
     /// <inheritdoc />
     protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(OKXExchange._serializerContext));
     /// <inheritdoc />
-    protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(OKXExchange._serializerContext));
+    protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(OKXExchange._serializerContext));
 
     public IOKXSocketClientUnifiedApiShared SharedClient => this;
 
@@ -79,7 +87,7 @@ internal partial class OKXSocketClientUnifiedApi : SocketApiClient, IOKXSocketCl
     /// <inheritdoc />
     public override string GetListenerIdentifier(IMessageAccessor message)
     {
-        if (!message.IsJson)
+        if (!message.IsValid)
             return "pong";
 
         var id = message.GetValue<string>(_idPath);
@@ -128,7 +136,7 @@ internal partial class OKXSocketClientUnifiedApi : SocketApiClient, IOKXSocketCl
                 }
             ]
         };
-        return Task.FromResult<Query?>(new OKXQuery(request, false));
+        return Task.FromResult<Query?>(new OKXQuery(this, request, false));
     }
 
     internal Task<CallResult<UpdateSubscription>> SubscribeInternalAsync(string url, Subscription subscription, CancellationToken ct)
@@ -147,7 +155,7 @@ internal partial class OKXSocketClientUnifiedApi : SocketApiClient, IOKXSocketCl
 
     internal async Task<CallResult<T>> QueryInternalAsync<T>(string url, string operation, Dictionary<string, object> parameters, bool authenticated, int weight, CancellationToken ct = default)
     {
-        var query = new OKXIdQuery<T>(operation, new object[] { parameters }, authenticated, weight);
+        var query = new OKXIdQuery<T>(this, operation, new object[] { parameters }, authenticated, weight);
         var result = await QueryAsync(url, query, ct).ConfigureAwait(false);
         if (!result)
             return result.AsError<T>(result.Error!);
@@ -157,7 +165,7 @@ internal partial class OKXSocketClientUnifiedApi : SocketApiClient, IOKXSocketCl
 
     internal async Task<CallResult<T[]>> QueryInternalAsync<T>(string url, string operation, IEnumerable<object> data, bool authenticated, int weight, CancellationToken ct = default)
     {
-        var query = new OKXIdQuery<T>(operation, data.ToArray(), authenticated, weight);
+        var query = new OKXIdQuery<T>(this, operation, data.ToArray(), authenticated, weight);
         var result = await QueryAsync(url, query, ct).ConfigureAwait(false);
         if (!result)
             return result.AsError<T[]>(result.Error!);

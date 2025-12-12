@@ -1,3 +1,4 @@
+using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.RateLimiting.Guards;
 using OKX.Net.Enums;
 using OKX.Net.ExtensionMethods;
@@ -76,7 +77,7 @@ internal class OKXRestClientUnifiedApiExchangeData : IOKXRestClientUnifiedApiExc
             return result.As<OKXOrderBook>(default);
 
         if (!result.Data.Any())
-            return result.AsError<OKXOrderBook>(new OKXRestApiError(null, "No data", null));
+            return result.AsError<OKXOrderBook>(new ServerError(new ErrorInfo(ErrorType.Unknown, "No data")));
 
         var orderbook = result.Data.First();
         orderbook.Symbol = symbol;
@@ -114,8 +115,8 @@ internal class OKXRestClientUnifiedApiExchangeData : IOKXRestClientUnifiedApiExc
     public virtual async Task<WebCallResult<OKXKline[]>> GetKlineHistoryAsync(string symbol, KlineInterval klineInterval, DateTime? startTime = null,
         DateTime? endTime = null, int limit = 100, CancellationToken ct = default)
     {
-        if (limit < 1 || limit > 100)
-            throw new ArgumentException("Limit can be between 1-100.");
+        if (limit < 1 || limit > 300)
+            throw new ArgumentException("Limit can be between 1-300.");
 
         var parameters = new ParameterCollection
         {
@@ -373,7 +374,7 @@ internal class OKXRestClientUnifiedApiExchangeData : IOKXRestClientUnifiedApiExc
         DateTime? startTime = null,
         DateTime? endTime = null, int limit = 100, CancellationToken ct = default)
     {
-        if (limit < 1 || limit > 100)
+        if (limit < 1 || limit > 400)
             throw new ArgumentException("Limit can be between 1-100.");
 
         var parameters = new ParameterCollection

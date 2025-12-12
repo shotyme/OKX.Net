@@ -149,4 +149,22 @@ public record OKXAccountConfiguration
     /// </summary>
     [JsonPropertyName("type")]
     public UserAccountType AccountType { get; set; }
+
+    /// <summary>
+    /// Spot fee charging type
+    /// </summary>
+    [JsonPropertyName("feeType")]
+    public FeeType FeeType { get; set; }
+
+    /// <summary>
+    /// The settlement asset for USD contracts
+    /// </summary>
+    [JsonPropertyName("settleCcy")]
+    public string SettleAsset { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Available settlement assets for USD contracts
+    /// </summary>
+    [JsonPropertyName("settleCcyList")]
+    public string[] SettleAssetList { get; set; } = [];
 }
