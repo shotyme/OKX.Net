@@ -39,7 +39,7 @@ internal partial class OKXRestClientUnifiedApi : RestApiClient, IOKXRestClientUn
         SubAccounts = new OKXRestClientUnifiedApiSubAccounts(this);
         CopyTrading = new OKXRestClientUnifiedApiCopyTrading(this);
 
-        if (options.Environment.Name == TradeEnvironmentNames.Testnet)
+        if (options.Environment.Name == TradeEnvironmentNames.Testnet || options.Environment.Name == "DemoEu")
         {
             StandardRequestHeaders = new Dictionary<string, string>
             {

@@ -51,7 +51,7 @@ internal partial class OKXSocketClientUnifiedApi : SocketApiClient, IOKXSocketCl
 
         ProcessUnparsableMessages = true;
 
-        _demoTrading = options.Environment.Name == TradeEnvironmentNames.Testnet;
+        _demoTrading = options.Environment.Name == TradeEnvironmentNames.Testnet || options.Environment.Name == "DemoEu";
 
         AddSystemSubscription(new OKXConnCountSubscription(_logger));
 

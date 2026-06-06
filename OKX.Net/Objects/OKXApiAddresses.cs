@@ -40,4 +40,13 @@ public class OKXApiAddresses
         UnifiedRestAddress = "https://www.okx.com",
         UnifiedSocketAddress = "wss://wspap.okx.com:8443",
     };
+
+    /// <summary>
+    /// Demo addresses for Europe customers
+    /// </summary>
+    public static OKXApiAddresses DemoEu = new OKXApiAddresses
+    {
+        UnifiedRestAddress = "https://eea.okx.com",
+        UnifiedSocketAddress = "wss://wseea.okx.com:8443",
+    };
 }
