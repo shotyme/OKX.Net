@@ -9795,6 +9795,11 @@
             Demo addresses
             </summary>
         </member>
+        <member name="F:OKX.Net.Objects.OKXApiAddresses.DemoEu">
+            <summary>
+            Demo addresses for Europe customers
+            </summary>
+        </member>
         <member name="T:OKX.Net.Objects.Options.OKXOptions">
             <summary>
             OKX options
@@ -10407,17 +10412,17 @@
         </member>
         <member name="P:OKX.Net.Objects.Public.OKXInstrument.PositionLimitQuantity">
             <summary>
-            Maximum position value (USD) for this instrument at the user level, based on the notional value of all same-direction open positions and resting orders. The effective user limit is max(posLmtAmt, oiUSD × posLmtPct). Applicable to SWAP/FUTURES.
+            Maximum position value (USD) for this instrument at the user level, based on the notional value of all same-direction open positions and resting orders. The effective user limit is max(posLmtAmt, oiUSD � posLmtPct). Applicable to SWAP/FUTURES.
             </summary>
         </member>
         <member name="P:OKX.Net.Objects.Public.OKXInstrument.PositionLimitPercentage">
             <summary>
-            Maximum position ratio (e.g., 30 for 30%) a user may hold relative to the platform’s current total position value. The effective user limit is max(posLmtAmt, oiUSD × posLmtPct). Applicable to SWAP/FUTURES.
+            Maximum position ratio (e.g., 30 for 30%) a user may hold relative to the platform�s current total position value. The effective user limit is max(posLmtAmt, oiUSD � posLmtPct). Applicable to SWAP/FUTURES.
             </summary>
         </member>
         <member name="P:OKX.Net.Objects.Public.OKXInstrument.PositionPlatformLimitQuantity">
             <summary>
-            Platform-wide maximum position value (USD) for this instrument. If the global position limit switch is enabled and platform total open interest reaches or exceeds this value, all users’ new opening orders for this instrument are rejected; otherwise, orders pass.
+            Platform-wide maximum position value (USD) for this instrument. If the global position limit switch is enabled and platform total open interest reaches or exceeds this value, all users� new opening orders for this instrument are rejected; otherwise, orders pass.
             </summary>
         </member>
         <member name="T:OKX.Net.Objects.Public.OKXInsuranceFund">
@@ -12901,6 +12906,11 @@
         <member name="P:OKX.Net.OKXEnvironment.Demo">
             <summary>
             Live environment
+            </summary>
+        </member>
+        <member name="P:OKX.Net.OKXEnvironment.DemoEu">
+            <summary>
+            Demo environment for Europe customers
             </summary>
         </member>
         <member name="M:OKX.Net.OKXEnvironment.CreateCustom(System.String,System.String,System.String)">
