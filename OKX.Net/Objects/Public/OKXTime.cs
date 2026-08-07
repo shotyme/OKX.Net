@@ -1,4 +1,3 @@
-using CryptoExchange.Net.Converters.SystemTextJson;
 namespace OKX.Net.Objects.Public;
 
 /// <summary>
@@ -8,7 +7,7 @@ namespace OKX.Net.Objects.Public;
 public record OKXTime
 {
     /// <summary>
-    /// System time
+    /// ["<c>ts</c>"] System time
     /// </summary>
     [JsonPropertyName("ts"), JsonConverter(typeof(DateTimeConverter))]
     public DateTime Time { get; set; }

@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Attributes;
 
 namespace OKX.Net.Enums;
@@ -11,22 +9,22 @@ namespace OKX.Net.Enums;
 public enum BorrowRepayType
 {
     /// <summary>
-    /// Auto borrow
+    /// ["<c>auto_borrow</c>"] Auto borrow
     /// </summary>
     [Map("auto_borrow")]
     AutoBorrow,
     /// <summary>
-    /// Auto repay
+    /// ["<c>auto_repay</c>"] Auto repay
     /// </summary>
     [Map("auto_repay")]
     AutoRepay,
     /// <summary>
-    /// Manual borrow
+    /// ["<c>manual_borrow</c>"] Manual borrow
     /// </summary>
     [Map("manual_borrow")]
     ManualBorrow,
     /// <summary>
-    /// Manual repay
+    /// ["<c>manual_repay</c>"] Manual repay
     /// </summary>
     [Map("manual_repay")]
     ManualRepay

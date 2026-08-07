@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Attributes;
 
 namespace OKX.Net.Enums;
@@ -11,12 +9,12 @@ namespace OKX.Net.Enums;
 public enum LoanType
 {
     /// <summary>
-    /// VIP loans
+    /// ["<c>1</c>"] VIP loans
     /// </summary>
     [Map("1")]
     VIPLoans,
     /// <summary>
-    /// Market loans
+    /// ["<c>2</c>"] Market loans
     /// </summary>
     [Map("2")]
     MarketLoans

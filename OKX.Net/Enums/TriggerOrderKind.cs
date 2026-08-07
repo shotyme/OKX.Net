@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Attributes;
 
 namespace OKX.Net.Enums
@@ -11,12 +9,12 @@ namespace OKX.Net.Enums
     public enum TriggerOrderKind
     {
         /// <summary>
-        /// Condition
+        /// ["<c>condition</c>"] Condition
         /// </summary>
         [Map("condition")]
         Condition,
         /// <summary>
-        /// Limit
+        /// ["<c>limit</c>"] Limit
         /// </summary>
         [Map("limit")]
         Limit

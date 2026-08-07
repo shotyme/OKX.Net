@@ -1,8 +1,3 @@
-using CryptoExchange.Net.Converters.SystemTextJson;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace OKX.Net.Objects.Account;
 
 /// <summary>
@@ -12,7 +7,7 @@ namespace OKX.Net.Objects.Account;
 public record OKXAutoRepayStatus
 {
     /// <summary>
-    /// Auto repay enabled or not
+    /// ["<c>autoRepay</c>"] Auto repay enabled or not
     /// </summary>
     [JsonPropertyName("autoRepay")]
     public bool AutoRepay { get; set; }

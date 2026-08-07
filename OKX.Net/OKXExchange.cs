@@ -11,6 +11,20 @@ namespace OKX.Net
     public static class OKXExchange
     {
         /// <summary>
+        /// Platform metadata
+        /// </summary>
+        public static PlatformInfo Metadata { get; } = new PlatformInfo(
+                "OKX",
+                "OKX",
+                "https://raw.githubusercontent.com/JKorf/OKX.Net/master/OKX.Net/Icon/icon.png",
+                "https://www.okx.com",
+                ["https://www.okx.com/docs-v5/en/"],
+                PlatformType.CryptoCurrencyExchange,
+                CentralizationType.Centralized,
+                OKXEnvironment.All
+                );
+
+        /// <summary>
         /// Exchange name
         /// </summary>
         public static string ExchangeName => "OKX";
@@ -42,11 +56,13 @@ namespace OKX.Net
         /// </summary>
         public static ExchangeType Type { get; } = ExchangeType.CEX;
 
-        internal const string ClientOrderId = "c84128021aecBCDE";
-        internal const string ClientOrderIdPrefix = ClientOrderId + LibraryHelpers.ClientOrderIdSeparator;
-
-
         internal static JsonSerializerContext _serializerContext = JsonSerializerContextCache.GetOrCreate<OKXSourceGenerationContext>();
+        internal static ParameterSerializationSettings _parameterSerializationSettings = new ParameterSerializationSettings()
+        {
+            DateTimes = DateTimeSerialization.MillisecondsString,
+            Decimal = DecimalSerialization.String,
+            Integer = IntegerSerialization.String
+        };  
 
         /// <summary>
         /// Aliases for OKX assets
@@ -58,6 +74,18 @@ namespace OKX.Net
                 new AssetAlias("USDT", SharedSymbol.UsdOrStable.ToUpperInvariant(), AliasType.OnlyToExchange)
             ]
         };
+
+        /// <summary>
+        /// Aliases for OKX assets in the Europe environment
+        /// </summary>
+        public static AssetAliasConfiguration AssetAliasesFuturesEurope { get; } = new AssetAliasConfiguration
+        {
+            Aliases =
+            [
+                new AssetAlias("USD", SharedSymbol.UsdOrStable.ToUpperInvariant(), AliasType.OnlyToExchange)
+            ]
+        };
+
 
         /// <summary>
         /// Format a base and quote asset to an OKX recognized symbol 
@@ -82,13 +110,46 @@ namespace OKX.Net
         }
 
         /// <summary>
+        /// Format a base and quote asset to an OKX recognized symbol for the Europe environment
+        /// </summary>
+        /// <param name="baseAsset">Base asset</param>
+        /// <param name="quoteAsset">Quote asset</param>
+        /// <param name="tradingMode">Trading mode</param>
+        /// <param name="deliverTime">Delivery time for delivery futures</param>
+        /// <returns></returns>
+        public static string FormatSymbolEurope(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime)
+        {
+            if (tradingMode == TradingMode.Spot)
+            {
+                baseAsset = AssetAliases.CommonToExchangeName(baseAsset.ToUpperInvariant());
+                quoteAsset = AssetAliases.CommonToExchangeName(quoteAsset.ToUpperInvariant());
+                return baseAsset + "-" + quoteAsset;
+            }
+
+            baseAsset = AssetAliasesFuturesEurope.CommonToExchangeName(baseAsset.ToUpperInvariant());
+            quoteAsset = AssetAliasesFuturesEurope.CommonToExchangeName(quoteAsset.ToUpperInvariant());
+            var symbols = ExchangeSymbolCache.GetSymbolsForBaseAsset("OKXFutures", "Europe", tradingMode.ToString(), baseAsset);
+            var matchingSymbol = symbols.FirstOrDefault(x => x.QuoteAsset == quoteAsset && (x.DeliverTime == deliverTime 
+                || (deliverTime == null && x.DeliverTime - DateTime.UtcNow > TimeSpan.FromDays(365 * 2)))); // XPerp futures have a delivery time in 2031
+
+            if (matchingSymbol != null && matchingSymbol.SymbolName != null)
+                return matchingSymbol.SymbolName!;
+
+            // Fallback
+            if (deliverTime == null)
+                return baseAsset + "-" + quoteAsset + "-SWAP";
+            else
+                return baseAsset + "-" + quoteAsset + $"_UM_{deliverTime:yyMMdd}";
+        }
+
+        /// <summary>
         /// Rate limiter configuration for the OKX API
         /// </summary>
-        public static OKXRateLimiters RateLimiter { get; } = new OKXRateLimiters();
+        public static OKXRateLimiters RateLimiter { get; set; } = new OKXRateLimiters();
     }
 
     /// <summary>
-    /// Rate limiter configuration for the GateIo API
+    /// Rate limiter configuration for the OKX API
     /// </summary>
     public class OKXRateLimiters
     {
@@ -103,13 +164,19 @@ namespace OKX.Net
         public event Action<RateLimitUpdateEvent> RateLimitUpdated;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        internal OKXRateLimiters()
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public OKXRateLimiters()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             Initialize();
         }
 
-        private void Initialize()
+        /// <summary>
+        /// Initialize the rate limits
+        /// </summary>
+        protected virtual void Initialize()
         {
             EndpointGate = new RateLimitGate("Endpoint Gate");
             EndpointGate.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);

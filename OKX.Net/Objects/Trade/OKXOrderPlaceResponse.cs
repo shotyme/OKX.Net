@@ -1,5 +1,3 @@
-using CryptoExchange.Net.Converters.SystemTextJson;
-using OKX.Net.Converters;
 namespace OKX.Net.Objects.Trade;
 
 /// <summary>
@@ -9,37 +7,43 @@ namespace OKX.Net.Objects.Trade;
 public record OKXOrderPlaceResponse
 {
     /// <summary>
-    /// Order id
+    /// ["<c>ordId</c>"] Order id
     /// </summary>
     [JsonPropertyName("ordId")]
     public long? OrderId { get; set; }
 
     /// <summary>
-    /// Client order id
+    /// ["<c>clOrdId</c>"] Client order id
     /// </summary>
     [JsonPropertyName("clOrdId")]
     public string? ClientOrderId { get; set; }
 
     /// <summary>
-    /// Tag
+    /// ["<c>tag</c>"] Tag
     /// </summary>
     [JsonPropertyName("tag")]
     public string Tag { get; set; } = string.Empty;
 
     /// <summary>
-    /// Code
+    /// ["<c>sCode</c>"] Code
     /// </summary>
     [JsonPropertyName("sCode")]
     public int Code { get; set; }
 
     /// <summary>
-    /// Message
+    /// ["<c>sMsg</c>"] Message
     /// </summary>
     [JsonPropertyName("sMsg")]
     public string Message { get; set; } = string.Empty;
 
     /// <summary>
-    /// Timestamp
+    /// ["<c>subCode</c>"] Sub code
+    /// </summary>
+    [JsonPropertyName("subCode")]
+    public string SubCode { get; set; } = string.Empty;
+
+    /// <summary>
+    /// ["<c>ts</c>"] Timestamp
     /// </summary>
     [JsonPropertyName("ts"), JsonConverter(typeof(DateTimeConverter))]
     public DateTime? Timestamp { get; set; }

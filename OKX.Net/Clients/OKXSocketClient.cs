@@ -4,13 +4,12 @@ using Microsoft.Extensions.Options;
 using OKX.Net.Clients.UnifiedApi;
 using OKX.Net.Interfaces.Clients;
 using OKX.Net.Interfaces.Clients.UnifiedApi;
-using OKX.Net.Objects;
 using OKX.Net.Objects.Options;
 
 namespace OKX.Net.Clients;
 
 /// <inheritdoc />
-public class OKXSocketClient : BaseSocketClient, IOKXSocketClient
+public class OKXSocketClient : BaseSocketClient<OKXEnvironment, OKXCredentials>, IOKXSocketClient
 {
     /// <summary>
     /// Unified API endpoints
@@ -37,15 +36,9 @@ public class OKXSocketClient : BaseSocketClient, IOKXSocketClient
     {
         Initialize(options.Value);
 
-        UnifiedApi = AddApiClient(new OKXSocketClientUnifiedApi(_logger, options.Value));
+        UnifiedApi = AddApiClient(new OKXSocketClientUnifiedApi(loggerFactory, options.Value));
     }
     #endregion
-
-    /// <inheritdoc />
-    public void SetOptions(UpdateOptions options)
-    {
-        UnifiedApi.SetOptions(options);
-    }
 
     /// <summary>
     /// Set default options
@@ -54,11 +47,5 @@ public class OKXSocketClient : BaseSocketClient, IOKXSocketClient
     public static void SetDefaultOptions(Action<OKXSocketOptions> optionsDelegate)
     {
         OKXSocketOptions.Default = ApplyOptionsDelegate(optionsDelegate);
-    }
-
-    /// <inheritdoc />
-    public virtual void SetApiCredentials(ApiCredentials credentials)
-    {
-        UnifiedApi.SetApiCredentials(credentials.Copy());
     }
 }

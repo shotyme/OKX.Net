@@ -3,6 +3,7 @@ using CryptoExchange.Net.Objects.Sockets;
 using OKX.Net.Enums;
 using OKX.Net.Interfaces.Clients.UnifiedApi;
 using OKX.Net.Objects.Account;
+using OKX.Net.Objects.Sockets.Models;
 using OKX.Net.Objects.Sockets.Subscriptions;
 using OKX.Net.Objects.Trade;
 
@@ -25,10 +26,11 @@ internal class OKXSocketClientUnifiedApiTrading : IOKXSocketClientUnifiedApiTrad
     #endregion
 
     /// <inheritdoc />
-    public async Task<CallResult<OKXOrderPlaceResponse>> PlaceOrderAsync(string symbol,
+    public async Task<QueryResult<OKXOrderPlaceResponse>> PlaceOrderAsync(
+        long symbolCode,
         OrderSide side,
         OrderType type,
-        Enums.TradeMode tradeMode,
+        TradeMode tradeMode,
         decimal quantity,
         decimal? price = null,
         PositionSide? positionSide = null,
@@ -42,91 +44,94 @@ internal class OKXSocketClientUnifiedApiTrading : IOKXSocketClientUnifiedApiTrad
         string? clientOrderId = null,
         bool? reduceOnly = null,
         string? tradeQuoteAsset = null,
+        decimal? maxSlippagePercentage = null,
+
         CancellationToken ct = default)
     {
-        var parameters = new Dictionary<string, object>()
+        var parameters = new Parameters(OKXExchange._parameterSerializationSettings)
         {
-            { "instId", symbol },
             { "tdMode", EnumConverter.GetString(tradeMode) },
             { "side", EnumConverter.GetString(side) },
             { "ordType", EnumConverter.GetString(type) },
             { "sz", quantity.ToString(CultureInfo.InvariantCulture) },
         };
 
-        parameters.AddOptionalParameter("ccy", asset);
-        parameters.AddOptionalParameter("clOrdId", clientOrderId);
-        parameters.AddOptionalParameter("tag", LibraryHelpers.GetClientReference(() => _client.ClientOptions.BrokerId, _client.Exchange));
-        parameters.AddOptionalParameter("posSide", EnumConverter.GetString(positionSide));
-        parameters.AddOptionalParameter("px", price?.ToString(CultureInfo.InvariantCulture));
-        parameters.AddOptionalParameter("reduceOnly", reduceOnly);
-        parameters.AddOptionalParameter("tgtCcy", EnumConverter.GetString(quantityAsset));
-        parameters.AddOptionalParameter("quickMgnType", EnumConverter.GetString(quickMarginType));
-        parameters.AddOptionalParameter("stpId", selfTradePreventionId);
-        parameters.AddOptionalParameter("stpMode", EnumConverter.GetString(selfTradePreventionMode));
-        parameters.AddOptionalParameter("tradeQuoteCcy", tradeQuoteAsset);
+        parameters.AddParameter("instIdCode", symbolCode);
+        parameters.Add("ccy", asset);
+        parameters.Add("clOrdId", clientOrderId);
+        parameters.Add("tag", LibraryHelpers.GetClientReference(() => _client.ClientOptions.BrokerId, _client.Exchange));
+        parameters.Add("posSide", EnumConverter.GetString(positionSide));
+        parameters.Add("px", price?.ToString(CultureInfo.InvariantCulture));
+        parameters.Add("reduceOnly", reduceOnly);
+        parameters.Add("tgtCcy", EnumConverter.GetString(quantityAsset));
+        parameters.Add("quickMgnType", EnumConverter.GetString(quickMarginType));
+        parameters.Add("stpId", selfTradePreventionId);
+        parameters.Add("stpMode", EnumConverter.GetString(selfTradePreventionMode));
+        parameters.Add("tradeQuoteCcy", tradeQuoteAsset);
+        parameters.Add("slippagePct", maxSlippagePercentage?.ToString(CultureInfo.InvariantCulture));
 
         var result = await _client.QueryInternalAsync<OKXOrderPlaceResponse>(_client.GetUri("/ws/v5/private"), "order", parameters, true, 1, ct).ConfigureAwait(false);
-        if (!result)
+        if (!result.Success)
             return result;
 
         if (!result.Data.Success)
-            return result.AsError<OKXOrderPlaceResponse>(new ServerError(result.Data.Code, _client.GetErrorInfo(result.Data.Code, result.Data.Message), null));
+            return QueryResult.Fail<OKXOrderPlaceResponse>(result, new ServerError(result.Data.Code, _client.GetErrorInfo(result.Data.Code, result.Data.Message)));
 
         return result;
     }
 
     /// <inheritdoc />
-    public async Task<CallResult<CallResult<OKXOrderPlaceResponse>[]>> PlaceMultipleOrdersAsync(IEnumerable<OKXOrderPlaceRequest> orders, CancellationToken ct = default)
+    public async Task<QueryResult<CallResult<OKXOrderPlaceResponse>[]>> PlaceMultipleOrdersAsync(IEnumerable<OKXOrderPlaceRequest> orders, CancellationToken ct = default)
     {
         foreach (var order in orders)
             order.Tag = LibraryHelpers.GetClientReference(() => _client.ClientOptions.BrokerId, _client.Exchange);        
 
         var result = await _client.QueryInternalAsync<OKXOrderPlaceResponse>(_client.GetUri("/ws/v5/private"), "batch-orders", orders.ToArray(), true, 1, ct).ConfigureAwait(false);
+        if (!result.Success)
+            return QueryResult.Fail<CallResult<OKXOrderPlaceResponse>[]>(result);
+
         var ordersResult = new List<CallResult<OKXOrderPlaceResponse>>();
         foreach (var item in result.Data)
         {
             if (item.Code > 0)
-                ordersResult.Add(new CallResult<OKXOrderPlaceResponse>(item, null, new ServerError(item.Code, _client.GetErrorInfo(item.Code, item.Message!))));
+                ordersResult.Add(CallResult.Fail<OKXOrderPlaceResponse>(new ServerError(item.Code, _client.GetErrorInfo(item.Code, item.Message!))));
             else
-                ordersResult.Add(new CallResult<OKXOrderPlaceResponse>(item));
+                ordersResult.Add(CallResult.Ok(item));
         }
 
         if (ordersResult.All(x => !x.Success))
-            return result.AsErrorWithData(new ServerError(new ErrorInfo(ErrorType.AllOrdersFailed, "All errors failed")), ordersResult.ToArray());
+            return QueryResult.Fail(result, new ServerError(new ErrorInfo(ErrorType.AllOrdersFailed, "All errors failed")), ordersResult.ToArray());
 
-        return result.As(ordersResult.ToArray());
+        return QueryResult.Ok(result, ordersResult.ToArray());
     }
 
     /// <inheritdoc />
-    public async Task<CallResult<OKXOrderCancelResponse>> CancelOrderAsync(string symbol, string? orderId = null, string? clientOrderId = null, CancellationToken ct = default)
+    public async Task<QueryResult<OKXOrderCancelResponse>> CancelOrderAsync(long symbolCode, string? orderId = null, string? clientOrderId = null, CancellationToken ct = default)
     {
-        var parameters = new Dictionary<string, object>()
-        {
-            { "instId", symbol }
-        };
-
-        parameters.AddOptionalParameter("ordId", orderId);
-        parameters.AddOptionalParameter("clOrdId", clientOrderId);
+        var parameters = new Parameters(OKXExchange._parameterSerializationSettings);
+        parameters.AddParameter("instIdCode", symbolCode);
+        parameters.Add("ordId", orderId);
+        parameters.Add("clOrdId", clientOrderId);
 
         var result = await _client.QueryInternalAsync<OKXOrderCancelResponse>(_client.GetUri("/ws/v5/private"), "cancel-order", parameters, true, 1, ct).ConfigureAwait(false);
-        if (!result)
+        if (!result.Success)
             return result;
 
         if (!result.Data.Success)
-            return result.AsError<OKXOrderCancelResponse>(new ServerError(result.Data.Code, _client.GetErrorInfo(result.Data.Code, result.Data.Message), null));
+            return QueryResult.Fail<OKXOrderCancelResponse>(result, new ServerError(result.Data.Code, _client.GetErrorInfo(result.Data.Code, result.Data.Message)));
 
         return result;
     }
 
     /// <inheritdoc />
-    public async Task<CallResult<OKXOrderCancelResponse[]>> CancelMultipleOrdersAsync(IEnumerable<OKXOrderCancelRequest> ordersToCancel, CancellationToken ct = default)
+    public async Task<QueryResult<OKXOrderCancelResponse[]>> CancelMultipleOrdersAsync(IEnumerable<OKXOrderCancelSocketRequest> ordersToCancel, CancellationToken ct = default)
     {
         return await _client.QueryInternalAsync<OKXOrderCancelResponse>(_client.GetUri("/ws/v5/private"), "batch-cancel-orders", ordersToCancel, true, 1, ct).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
-    public virtual async Task<CallResult<OKXOrderAmendResponse>> AmendOrderAsync(
-        string symbol,
+    public virtual async Task<QueryResult<OKXOrderAmendResponse>> AmendOrderAsync(
+        long symbolCode,
         long? orderId = null,
         string? clientOrderId = null,
         string? requestId = null,
@@ -134,34 +139,32 @@ internal class OKXSocketClientUnifiedApiTrading : IOKXSocketClientUnifiedApiTrad
         decimal? newPrice = null,
         CancellationToken ct = default)
     {
-        var parameters = new Dictionary<string, object>
-        {
-            { "instId", symbol },
-        };
-        parameters.AddOptionalParameter("ordId", orderId?.ToString(CultureInfo.InvariantCulture));
-        parameters.AddOptionalParameter("clOrdId", clientOrderId);
-        parameters.AddOptionalParameter("reqId", requestId);
-        parameters.AddOptionalParameter("newSz", newQuantity?.ToString(CultureInfo.InvariantCulture));
-        parameters.AddOptionalParameter("newPx", newPrice?.ToString(CultureInfo.InvariantCulture));
+        var parameters = new Parameters(OKXExchange._parameterSerializationSettings);
+        parameters.AddParameter("instIdCode", symbolCode);
+        parameters.Add("ordId", orderId?.ToString(CultureInfo.InvariantCulture));
+        parameters.Add("clOrdId", clientOrderId);
+        parameters.Add("reqId", requestId);
+        parameters.Add("newSz", newQuantity?.ToString(CultureInfo.InvariantCulture));
+        parameters.Add("newPx", newPrice?.ToString(CultureInfo.InvariantCulture));
 
         var result = await _client.QueryInternalAsync<OKXOrderAmendResponse>(_client.GetUri("/ws/v5/private"), "amend-order", parameters, true, 1, ct).ConfigureAwait(false);
-        if (!result)
+        if (!result.Success)
             return result;
 
         if (!result.Data.Success)
-            return result.AsError<OKXOrderAmendResponse>(new ServerError(result.Data.Code, _client.GetErrorInfo(result.Data.Code, result.Data.Message), null));
+            return QueryResult.Fail<OKXOrderAmendResponse>(result, new ServerError(result.Data.Code, _client.GetErrorInfo(result.Data.Code, result.Data.Message)));
 
         return result;
     }
 
     /// <inheritdoc />
-    public async Task<CallResult<OKXOrderAmendResponse[]>> AmendMultipleOrdersAsync(IEnumerable<OKXOrderAmendRequest> ordersToCancel, CancellationToken ct = default)
+    public async Task<QueryResult<OKXOrderAmendResponse[]>> AmendMultipleOrdersAsync(IEnumerable<OKXOrderAmendRequest> ordersToCancel, CancellationToken ct = default)
     {
         return await _client.QueryInternalAsync<OKXOrderAmendResponse>(_client.GetUri("/ws/v5/private"), "batch-amend-orders", ordersToCancel, true, 1, ct).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
-    public virtual async Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(
+    public virtual async Task<WebSocketResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(
         InstrumentType instrumentType,
         string? symbol,
         string? instrumentFamily,
@@ -169,9 +172,24 @@ internal class OKXSocketClientUnifiedApiTrading : IOKXSocketClientUnifiedApiTrad
         Action<DataEvent<OKXPosition[]>> onData,
         CancellationToken ct = default)
     {
-        var subscription = new OKXSubscription<OKXPosition[]>(_logger, _client, new List<Objects.Sockets.Models.OKXSocketArgs>
+        var internalHandler = new Action<DateTime, string?, OKXSocketUpdate<OKXPosition[]>>((receiveTime, originalData, data) =>
+        {
+            DateTime? timestamp = data.Data.Length > 0 ? data.Data.Max(x => x.UpdateTime) : null;
+            if (timestamp != null)
+                _client.UpdateTimeOffset(timestamp.Value);
+
+            onData(
+                new DataEvent<OKXPosition[]>(OKXExchange.ExchangeName, data.Data, receiveTime, originalData)
+                    .WithUpdateType(data.EventType?.Equals("snapshot", StringComparison.Ordinal) == true ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                    .WithDataTimestamp(timestamp, _client.GetTimeOffset())
+                    .WithStreamId(data.Arg.Channel)
+                    .WithSymbol(data.Arg.Symbol)
+                );
+        });
+
+        var subscription = new OKXSubscription<OKXPosition[]>(_logger, _client, new List<OKXSocketArgs>
             {
-                new Objects.Sockets.Models.OKXSocketArgs
+                new OKXSocketArgs
                 {
                     Channel = "positions",
                     Symbol = symbol,
@@ -179,110 +197,207 @@ internal class OKXSocketClientUnifiedApiTrading : IOKXSocketClientUnifiedApiTrad
                     InstrumentFamily = instrumentFamily,
                     ExtraParams = "{ \"updateInterval\": " + (regularUpdates ? 1 : 0) + " }"
                 }
-            }, x => onData(x.WithDataTimestamp(x.Data.Any() ? x.Data.Max(x => x.UpdateTime) : default)), true);
+            }, internalHandler, true);
 
         return await _client.SubscribeInternalAsync(_client.GetUri("/ws/v5/private"), subscription, ct).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
-    public virtual async Task<CallResult<UpdateSubscription>> SubscribeToLiquidationWarningUpdatesAsync(InstrumentType instrumentType,
+    public virtual async Task<WebSocketResult<UpdateSubscription>> SubscribeToLiquidationWarningUpdatesAsync(InstrumentType instrumentType,
         string? instrumentFamily,
         Action<DataEvent<OKXPosition>> onData,
         CancellationToken ct = default)
     {
-        var subscription = new OKXSubscription<OKXPosition[]>(_logger, _client, new List<Objects.Sockets.Models.OKXSocketArgs>
+        var internalHandler = new Action<DateTime, string?, OKXSocketUpdate<OKXPosition[]>>((receiveTime, originalData, data) =>
+        {
+            if (!data.Data.Any())
+                return;
+
+            _client.UpdateTimeOffset(data.Data.Max(x => x.Time));
+            foreach (var item in data.Data)
             {
-                new Objects.Sockets.Models.OKXSocketArgs
+                onData(
+                    new DataEvent<OKXPosition>(OKXExchange.ExchangeName, item, receiveTime, originalData)
+                        .WithUpdateType(data.EventType?.Equals("snapshot", StringComparison.Ordinal) == true ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithDataTimestamp(item.UpdateTime, _client.GetTimeOffset())
+                        .WithStreamId(data.Arg.Channel)
+                        .WithSymbol(data.Arg.Symbol)
+                    );
+            }
+        });
+
+        var subscription = new OKXSubscription<OKXPosition[]>(_logger, _client, new List<OKXSocketArgs>
+            {
+                new OKXSocketArgs
                 {
                     Channel = "liquidation-warning",
                     InstrumentType = instrumentType,
                     InstrumentFamily = instrumentFamily
                 }
-            }, x => onData(x.As(x.Data.First()).WithDataTimestamp(x.Data.First().UpdateTime)), true);
+            }, internalHandler, true);
 
         return await _client.SubscribeInternalAsync(_client.GetUri("/ws/v5/private"), subscription, ct).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
-    public virtual async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(
+    public virtual async Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(
         InstrumentType instrumentType,
         string? symbol,
         string? instrumentFamily,
         Action<DataEvent<OKXOrderUpdate>> onData,
         CancellationToken ct = default)
     {
-        var subscription = new OKXSubscription<OKXOrderUpdate[]>(_logger, _client, new List<Objects.Sockets.Models.OKXSocketArgs>
+        var internalHandler = new Action<DateTime, string?, OKXSocketUpdate<OKXOrderUpdate[]>>((receiveTime, originalData, data) =>
+        {
+            if (!data.Data.Any())
+                return;
+
+            _client.UpdateTimeOffset(data.Data.Max(x => x.UpdateTime));
+            foreach (var item in data.Data)
             {
-                new Objects.Sockets.Models.OKXSocketArgs
+                onData(
+                    new DataEvent<OKXOrderUpdate>(OKXExchange.ExchangeName, item, receiveTime, originalData)
+                        .WithUpdateType(data.EventType?.Equals("snapshot", StringComparison.Ordinal) == true ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithDataTimestamp(item.UpdateTime, _client.GetTimeOffset())
+                        .WithStreamId(data.Arg.Channel)
+                        .WithSymbol(data.Arg.Symbol)
+                    );
+            }
+        });
+
+        var subscription = new OKXSubscription<OKXOrderUpdate[]>(_logger, _client, new List<OKXSocketArgs>
+            {
+                new OKXSocketArgs
                 {
                     Channel = "orders",
                     Symbol = symbol,
                     InstrumentType = instrumentType,
                     InstrumentFamily = instrumentFamily,
                 }
-            }, x => onData(x.As(x.Data.First()).WithDataTimestamp(x.Data.First().UpdateTime)), true);
+            }, internalHandler, true);
 
         return await _client.SubscribeInternalAsync(_client.GetUri("/ws/v5/private"), subscription, ct).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
-    public virtual async Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(
+    public virtual async Task<WebSocketResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(
         string? symbol,
         Action<DataEvent<OKXUserTradeUpdate>> onData,
         CancellationToken ct = default)
     {
-        var subscription = new OKXSubscription<OKXUserTradeUpdate[]>(_logger, _client, new List<Objects.Sockets.Models.OKXSocketArgs>
+        var internalHandler = new Action<DateTime, string?, OKXSocketUpdate<OKXUserTradeUpdate[]>>((receiveTime, originalData, data) =>
+        {
+            if (!data.Data.Any())
+                return;
+
+            _client.UpdateTimeOffset(data.Data.Max(x => x.Timestamp));
+            foreach (var item in data.Data)
             {
-                new Objects.Sockets.Models.OKXSocketArgs
+
+                onData(
+                    new DataEvent<OKXUserTradeUpdate>(OKXExchange.ExchangeName, item, receiveTime, originalData)
+                        .WithUpdateType(data.EventType?.Equals("snapshot", StringComparison.Ordinal) == true ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithDataTimestamp(item.Timestamp, _client.GetTimeOffset())
+                        .WithStreamId(data.Arg.Channel)
+                        .WithSymbol(data.Arg.Symbol)
+                    );
+            }
+        });
+
+        var subscription = new OKXSubscription<OKXUserTradeUpdate[]>(_logger, _client, new List<OKXSocketArgs>
+            {
+                new OKXSocketArgs
                 {
                     Channel = "fills",
                     Symbol = symbol
                 }
-            }, x => onData(x.As(x.Data.First()).WithDataTimestamp(x.Data.First().Timestamp)), true);
+            }, internalHandler, true);
 
         return await _client.SubscribeInternalAsync(_client.GetUri("/ws/v5/private"), subscription, ct).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
-    public virtual async Task<CallResult<UpdateSubscription>> SubscribeToAlgoOrderUpdatesAsync(
+    public virtual async Task<WebSocketResult<UpdateSubscription>> SubscribeToAlgoOrderUpdatesAsync(
         InstrumentType instrumentType,
         string? symbol,
         string? instrumentFamily,
         Action<DataEvent<OKXAlgoOrderUpdate>> onData,
         CancellationToken ct = default)
     {
-        var subscription = new OKXSubscription<OKXAlgoOrderUpdate[]>(_logger, _client, new List<Objects.Sockets.Models.OKXSocketArgs>
+        var internalHandler = new Action<DateTime, string?, OKXSocketUpdate<OKXAlgoOrderUpdate[]>>((receiveTime, originalData, data) =>
+        {
+            if (!data.Data.Any())
+                return;
+
+            var maxTime = data.Data.Max(x => x.UpdateTime);
+            if (maxTime != null)
+                _client.UpdateTimeOffset(maxTime.Value);
+
+            foreach (var item in data.Data)
             {
-                new Objects.Sockets.Models.OKXSocketArgs
+                onData(
+                    new DataEvent<OKXAlgoOrderUpdate>(OKXExchange.ExchangeName, item, receiveTime, originalData)
+                        .WithUpdateType(data.EventType?.Equals("snapshot", StringComparison.Ordinal) == true ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithDataTimestamp(item.UpdateTime, _client.GetTimeOffset())
+                        .WithStreamId(data.Arg.Channel)
+                        .WithSymbol(data.Arg.Symbol)
+                    );
+            }
+        });
+
+        var subscription = new OKXSubscription<OKXAlgoOrderUpdate[]>(_logger, _client, new List<OKXSocketArgs>
+            {
+                new OKXSocketArgs
                 {
                     Channel = "orders-algo",
                     Symbol = symbol,
                     InstrumentType = instrumentType,
                     InstrumentFamily = instrumentFamily,
                 }
-            }, x => onData(x.As(x.Data.First()).WithDataTimestamp(x.Data.First().UpdateTime)), true);
+            }, internalHandler, true);
 
         return await _client.SubscribeInternalAsync(_client.GetUri("/ws/v5/business"), subscription, ct).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
-    public virtual async Task<CallResult<UpdateSubscription>> SubscribeToAdvanceAlgoOrderUpdatesAsync(
+    public virtual async Task<WebSocketResult<UpdateSubscription>> SubscribeToAdvanceAlgoOrderUpdatesAsync(
         InstrumentType instrumentType,
         string? symbol,
         string? algoId,
         Action<DataEvent<OKXAlgoOrderUpdate>> onData,
         CancellationToken ct = default)
     {
-        var subscription = new OKXSubscription<OKXAlgoOrderUpdate[]>(_logger, _client, new List<Objects.Sockets.Models.OKXSocketArgs>
+        var internalHandler = new Action<DateTime, string?, OKXSocketUpdate<OKXAlgoOrderUpdate[]>>((receiveTime, originalData, data) =>
+        {
+            if (!data.Data.Any())
+                return;
+
+            var maxTime = data.Data.Max(x => x.UpdateTime);
+            if (maxTime != null)
+                _client.UpdateTimeOffset(maxTime.Value);
+
+            foreach (var item in data.Data)
             {
-                new Objects.Sockets.Models.OKXSocketArgs
+                onData(
+                    new DataEvent<OKXAlgoOrderUpdate>(OKXExchange.ExchangeName, item, receiveTime, originalData)
+                        .WithUpdateType(data.EventType?.Equals("snapshot", StringComparison.Ordinal) == true ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithDataTimestamp(item.UpdateTime, _client.GetTimeOffset())
+                        .WithStreamId(data.Arg.Channel)
+                        .WithSymbol(data.Arg.Symbol)
+                    );
+            }
+        });
+
+        var subscription = new OKXSubscription<OKXAlgoOrderUpdate[]>(_logger, _client, new List<OKXSocketArgs>
+            {
+                new OKXSocketArgs
                 {
                     Channel = "algo-advance",
                     Symbol = symbol,
                     InstrumentType = instrumentType,
                     AlgoId = algoId,
                 }
-            }, x => onData(x.As(x.Data.First()).WithDataTimestamp(x.Data.First().UpdateTime)), true);
+            }, internalHandler, true);
 
         return await _client.SubscribeInternalAsync(_client.GetUri("/ws/v5/business"), subscription, ct).ConfigureAwait(false);
     }

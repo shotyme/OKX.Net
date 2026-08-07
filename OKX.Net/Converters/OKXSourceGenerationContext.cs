@@ -15,6 +15,9 @@ using OKX.Net.Objects.Trading;
 
 namespace OKX.Net.Converters
 {
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXGreeks[]>))]
+    [JsonSerializable(typeof(OKXSocketUpdate<OKXGreeks[]>))]
+
     [JsonSerializable(typeof(OKXConnectionCount))]
     [JsonSerializable(typeof(OKXSocketResponse<OKXOrderPlaceResponse>))]
     [JsonSerializable(typeof(OKXSocketResponse<OKXOrderCancelResponse>))]
@@ -143,6 +146,22 @@ namespace OKX.Net.Converters
     [JsonSerializable(typeof(OKXRestApiResponse<OKXAlgoOrderAmendResponse[]>))]
     [JsonSerializable(typeof(OKXRestApiResponse<OKXOrderPlaceResponse[]>))]
     [JsonSerializable(typeof(OKXRestApiResponse<OKXCheckOrderResponse[]>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXEstimatedLeverageInfo[]>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXRiskState[]>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXBorrowInterestLimit[]>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXPremiumHistory[]>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXSubAccountMaxWithdrawal[]>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXEntrustSubAccount[]>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXAccountRateLimit[]>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXOneClickRepayCurrencyList[]>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXOneClickRepayResponse[]>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXOneClickRepayHistory[]>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXOneClickRepayCurrencyListV2[]>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXOneClickRepayResponseV2[]>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXOneClickRepayHistoryV2[]>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXSubpositionHistory[]>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXCopyTradingActionResponse[]>))]
+    [JsonSerializable(typeof(OKXRestApiResponse<OKXLeadingInstrument[]>))]
     [JsonSerializable(typeof(OKXSocketUpdate<OKXOrderBook[]>))]
     [JsonSerializable(typeof(OKXRestApiResponse<OKXIndexComponents>))]
     [JsonSerializable(typeof(OKXRestApiResponse<OKXSupportCoins>))]
@@ -190,6 +209,7 @@ namespace OKX.Net.Converters
     [JsonSerializable(typeof(OKXAttachedAlgoOrder[]))]
     [JsonSerializable(typeof(OKXOrderAmendRequest[]))]
     [JsonSerializable(typeof(OKXOrderCancelRequest[]))]
+    [JsonSerializable(typeof(OKXOrderCancelSocketRequest[]))]
     [JsonSerializable(typeof(OKXOrderPlaceRequest[]))]
     [JsonSerializable(typeof(OKXOrderUpdate[]))]
     [JsonSerializable(typeof(OKXUserTradeUpdate[]))]
@@ -208,6 +228,8 @@ namespace OKX.Net.Converters
     [JsonSerializable(typeof(decimal))]
     [JsonSerializable(typeof(DateTime))]
     [JsonSerializable(typeof(DateTime?))]
+    [JsonSerializable(typeof(Parameters))]
+    [JsonSerializable(typeof(Parameters[]))]
     internal partial class OKXSourceGenerationContext : JsonSerializerContext
     {
     }

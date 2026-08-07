@@ -3,7 +3,7 @@
 /// <summary>
 /// Api addresses
 /// </summary>
-public class OKXApiAddresses
+public record OKXApiAddresses
 {
     /// <summary>
     /// Base rest address
@@ -33,20 +33,29 @@ public class OKXApiAddresses
     };
 
     /// <summary>
+    /// Europe demo customers addresses
+    /// </summary>
+    public static OKXApiAddresses EuropeDemo = new OKXApiAddresses
+    {
+        UnifiedRestAddress = "https://eea.okx.com",
+        UnifiedSocketAddress = "wss://wseeapap.okx.com:8443",
+    };
+
+    /// <summary>
+    /// US and AU customers addresses
+    /// </summary>
+    public static OKXApiAddresses Us = new OKXApiAddresses
+    {
+        UnifiedRestAddress = "https://us.okx.com",
+        UnifiedSocketAddress = "wss://wsus.okx.com:8443",
+    };
+
+    /// <summary>
     /// Demo addresses
     /// </summary>
     public static OKXApiAddresses Demo = new OKXApiAddresses
     {
         UnifiedRestAddress = "https://www.okx.com",
         UnifiedSocketAddress = "wss://wspap.okx.com:8443",
-    };
-
-    /// <summary>
-    /// Demo addresses for Europe customers
-    /// </summary>
-    public static OKXApiAddresses DemoEu = new OKXApiAddresses
-    {
-        UnifiedRestAddress = "https://eea.okx.com",
-        UnifiedSocketAddress = "wss://wseea.okx.com:8443",
     };
 }

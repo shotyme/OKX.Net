@@ -1,9 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CryptoExchange.Net.Attributes;
 
 namespace OKX.Net.Enums
 {
@@ -14,17 +9,17 @@ namespace OKX.Net.Enums
     public enum OpenType
     {
         /// <summary>
-        /// Fix price
+        /// ["<c>fix_price</c>"] Fix price
         /// </summary>
         [Map("fix_price")]
         FixPrice,
         /// <summary>
-        /// Prequote
+        /// ["<c>pre_quote</c>"] Prequote
         /// </summary>
         [Map("pre_quote")]
         PreQuote,
         /// <summary>
-        /// Call auction
+        /// ["<c>call_auction</c>"] Call auction
         /// </summary>
         [Map("call_auction")]
         CallAuction

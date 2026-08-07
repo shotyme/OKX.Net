@@ -1,4 +1,3 @@
-using CryptoExchange.Net.Converters.SystemTextJson;
 namespace OKX.Net.Objects.Funding;
 
 /// <summary>
@@ -8,7 +7,7 @@ namespace OKX.Net.Objects.Funding;
 public record OKXWithdrawalId
 {
     /// <summary>
-    /// Withdrawal id
+    /// ["<c>wdId</c>"] Withdrawal id
     /// </summary>
     [JsonPropertyName("wdId")]
     public string WithdrawalId { get; set; } = string.Empty;

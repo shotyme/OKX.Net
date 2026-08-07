@@ -4,13 +4,12 @@ using Microsoft.Extensions.Options;
 using OKX.Net.Clients.UnifiedApi;
 using OKX.Net.Interfaces.Clients;
 using OKX.Net.Interfaces.Clients.UnifiedApi;
-using OKX.Net.Objects;
 using OKX.Net.Objects.Options;
 
 namespace OKX.Net.Clients;
 
 /// <inheritdoc />
-public class OKXRestClient : BaseRestClient, IOKXRestClient
+public class OKXRestClient : BaseRestClient<OKXEnvironment, OKXCredentials>, IOKXRestClient
 {
     #region Internal Fields
     /// <summary>
@@ -40,15 +39,9 @@ public class OKXRestClient : BaseRestClient, IOKXRestClient
     {
         Initialize(options.Value);
 
-        UnifiedApi = AddApiClient(new OKXRestClientUnifiedApi(_logger, httpClient, options.Value));
+        UnifiedApi = AddApiClient(new OKXRestClientUnifiedApi(loggerFactory, httpClient, options.Value));
     }
     #endregion
-
-    /// <inheritdoc />
-    public void SetOptions(UpdateOptions options)
-    {
-        UnifiedApi.SetOptions(options);
-    }
 
     /// <summary>
     /// Sets the default options to use for new clients
@@ -57,14 +50,5 @@ public class OKXRestClient : BaseRestClient, IOKXRestClient
     public static void SetDefaultOptions(Action<OKXRestOptions> optionsDelegate)
     {
         OKXRestOptions.Default = ApplyOptionsDelegate(optionsDelegate);
-    }
-
-    /// <summary>
-    /// Sets the API Credentials
-    /// </summary>
-    /// <param name="credentials">API Credentials Object</param>
-    public void SetApiCredentials(ApiCredentials credentials)
-    {
-        UnifiedApi.SetApiCredentials(credentials);
     }
 }

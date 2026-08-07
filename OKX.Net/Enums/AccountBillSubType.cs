@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Attributes;
 
 namespace OKX.Net.Enums;
@@ -184,7 +182,7 @@ public enum AccountBillSubType
     ConvertOut,
     [Map("320")]
     SimpleBuy,
-    [Map("320")]
+    [Map("321")]
     SimpleSell,
     [Map("355")]
     SettlementPnl,

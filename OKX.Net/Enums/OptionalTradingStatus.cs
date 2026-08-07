@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Attributes;
 
 namespace OKX.Net.Enums;
@@ -11,12 +9,12 @@ namespace OKX.Net.Enums;
 public enum OptionalTradingStatus
 {
     /// <summary>
-    /// Not activated
+    /// ["<c>0</c>"] Not activated
     /// </summary>
     [Map("0")]
     NotActivated,
     /// <summary>
-    /// Activated
+    /// ["<c>1</c>"] Activated
     /// </summary>
     [Map("1")]
     Activated

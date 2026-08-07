@@ -1,7 +1,8 @@
 ﻿using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default;
 using OKX.Net.Objects.Sockets.Models;
+using CryptoExchange.Net.Sockets.Default.Routing;
 
 namespace OKX.Net.Objects.Sockets.Queries;
 internal class OKXQuery : Query<OKXSocketResponse>
@@ -12,14 +13,15 @@ internal class OKXQuery : Query<OKXSocketResponse>
     {
         _client = client;
 
-        var ids = new List<string> { "error" };
+        var routes = new List<MessageRoute>();
         foreach (var arg in request.Args)
         {
-            ids.Add(request.Op + arg.Channel.ToLowerInvariant() + arg.InstrumentType?.ToString().ToLowerInvariant() + arg.InstrumentFamily?.ToString().ToLowerInvariant() + arg.Symbol?.ToLowerInvariant());
-            ids.Add("error" + arg.Channel.ToLowerInvariant() + arg.InstrumentType?.ToString().ToLowerInvariant() + arg.InstrumentFamily?.ToString().ToLowerInvariant() + arg.Symbol?.ToLowerInvariant());
+            var topic = arg.InstrumentType + arg.InstrumentFamily + arg.Symbol;
+            routes.Add(MessageRoute.CreateForQuery<OKXSocketResponse>(request.Op + arg.Channel, string.IsNullOrEmpty(topic) ? null : topic, HandleMessage));
+            routes.Add(MessageRoute.CreateForQuery<OKXSocketResponse>("error" + arg.Channel + topic, HandleMessage));
         }
 
-        MessageMatcher = MessageMatcher.Create<OKXSocketResponse>(ids, HandleMessage);
+        MessageRouter = MessageRouter.Create(routes.ToArray());
 
         RequiredResponses = request.Args.Count;
     }
@@ -27,14 +29,14 @@ internal class OKXQuery : Query<OKXSocketResponse>
     public OKXQuery(SocketApiClient client, OKXSocketAuthRequest request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
     {
         _client = client;
-        MessageMatcher = MessageMatcher.Create<OKXSocketResponse>(["login", "error"], HandleMessage);
+        MessageRouter = MessageRouter.CreateForQuery<OKXSocketResponse>(["login", "error"], HandleMessage);
     }
 
-    public CallResult<OKXSocketResponse> HandleMessage(SocketConnection connection, DataEvent<OKXSocketResponse> message)
+    public CallResult<OKXSocketResponse> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, OKXSocketResponse message)
     {
-        if (string.Equals(message.Data.Event, "error", StringComparison.Ordinal))
-            return new CallResult<OKXSocketResponse>(new ServerError(message.Data.Code!.Value, _client.GetErrorInfo(message.Data.Code.Value, message.Data.Message!)), message.OriginalData);
+        if (string.Equals(message.Event, "error", StringComparison.Ordinal))
+            return CallResult<OKXSocketResponse>.Fail(new ServerError(message.Code!.Value, _client.GetErrorInfo(message.Code.Value, message.Message!)), originalData);
 
-        return new CallResult<OKXSocketResponse>(message.Data, message.OriginalData, null);
+        return CallResult<OKXSocketResponse>.Ok(message, originalData);
     }
 }

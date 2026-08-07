@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Attributes;
 
 namespace OKX.Net.Enums;
@@ -11,12 +9,12 @@ namespace OKX.Net.Enums;
 public enum ChaseType
 {
     /// <summary>
-    /// Distance from best bid/ask price. Default
+    /// ["<c>distance</c>"] Distance from best bid/ask price. Default
     /// </summary>
     [Map("distance")]
     Distance,
     /// <summary>
-    /// Ratio
+    /// ["<c>ratio</c>"] Ratio
     /// </summary>
     [Map("ratio")]
     Ratio

@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Attributes;
 
 namespace OKX.Net.Enums;
@@ -11,17 +9,17 @@ namespace OKX.Net.Enums;
 public enum AccountRoleType
 {
     /// <summary>
-    /// Normal user
+    /// ["<c>0</c>"] Normal user
     /// </summary>
     [Map("0")]
     GeneralUser,
     /// <summary>
-    /// Leading trader
+    /// ["<c>1</c>"] Leading trader
     /// </summary>
     [Map("1")]
     LeadingTrader,
     /// <summary>
-    /// Copy trader
+    /// ["<c>2</c>"] Copy trader
     /// </summary>
     [Map("2")]
     CopyTrader

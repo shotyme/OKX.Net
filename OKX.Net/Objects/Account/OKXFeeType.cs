@@ -1,9 +1,4 @@
-﻿using OKX.Net.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OKX.Net.Enums;
 
 namespace OKX.Net.Objects.Account;
 
@@ -13,7 +8,7 @@ namespace OKX.Net.Objects.Account;
 public record OKXFeeType
 {
     /// <summary>
-    /// Fee type
+    /// ["<c>feeType</c>"] Fee type
     /// </summary>
     [JsonPropertyName("feeType")]
     public FeeType FeeType { get; set; }

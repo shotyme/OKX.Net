@@ -1,4 +1,3 @@
-using CryptoExchange.Net.Converters.SystemTextJson;
 using OKX.Net.Enums;
 
 namespace OKX.Net.Objects.Funding;
@@ -10,25 +9,25 @@ namespace OKX.Net.Objects.Funding;
 public record OKXSavingActionResponse
 {
     /// <summary>
-    /// Asset
+    /// ["<c>ccy</c>"] Asset
     /// </summary>
     [JsonPropertyName("ccy")]
     public string Asset { get; set; } = string.Empty;
 
     /// <summary>
-    /// Quantity
+    /// ["<c>amt</c>"] Quantity
     /// </summary>
     [JsonPropertyName("amt")]
     public decimal? Quantity { get; set; }
 
     /// <summary>
-    /// Rate
+    /// ["<c>rate</c>"] Rate
     /// </summary>
     [JsonPropertyName("rate")]
     public decimal? PurchaseRate { get; set; }
 
     /// <summary>
-    /// Side
+    /// ["<c>side</c>"] Side
     /// </summary>
     [JsonPropertyName("side")]
     public SavingActionSide Side { get; set; }

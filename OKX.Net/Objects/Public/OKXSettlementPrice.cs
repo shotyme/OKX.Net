@@ -1,7 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace OKX.Net.Objects.Public
 {
     /// <summary>
@@ -10,22 +6,22 @@ namespace OKX.Net.Objects.Public
     public record OKXSettlementPrice
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>instId</c>"] Symbol
         /// </summary>
         [JsonPropertyName("instId")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Estimated settlement price
+        /// ["<c>estSettlePx</c>"] Estimated settlement price
         /// </summary>
         [JsonPropertyName("estSettlePx")]
         public decimal EstimatedSettlementPrice { get; set; }
         /// <summary>
-        /// Next settlement time
+        /// ["<c>nextSettleTime</c>"] Next settlement time
         /// </summary>
         [JsonPropertyName("nextSettleTime")]
         public DateTime NextSettlementTime { get; set; }
         /// <summary>
-        /// Data timestamp
+        /// ["<c>ts</c>"] Data timestamp
         /// </summary>
         [JsonPropertyName("ts")]
         public DateTime Timestamp { get; set; }

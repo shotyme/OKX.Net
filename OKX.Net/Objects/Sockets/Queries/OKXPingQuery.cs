@@ -1,4 +1,5 @@
 ﻿using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default.Routing;
 
 namespace OKX.Net.Objects.Sockets.Queries;
 internal class OKXPingQuery : Query<string>
@@ -6,6 +7,6 @@ internal class OKXPingQuery : Query<string>
     public OKXPingQuery() : base("ping", false, 0)
     {
         RequestTimeout = TimeSpan.FromSeconds(5);
-        MessageMatcher = MessageMatcher.Create<string>("pong");
+        MessageRouter = MessageRouter.CreateVoid<string>("pong");
     }
 }

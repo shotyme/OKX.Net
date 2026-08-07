@@ -5,7 +5,7 @@ namespace OKX.Net.Objects.Options;
 /// <summary>
 /// Socket client options
 /// </summary>
-public class OKXSocketOptions : SocketExchangeOptions<OKXEnvironment, ApiCredentials>
+public class OKXSocketOptions : SocketExchangeOptions<OKXEnvironment, OKXCredentials>
 {
     /// <summary>
     /// Default options for new OKXRestClients
@@ -30,6 +30,11 @@ public class OKXSocketOptions : SocketExchangeOptions<OKXEnvironment, ApiCredent
     public string? BrokerId { get; set; }
 
     /// <summary>
+    /// Whether to use XPerps as perpetual linear contracts when using the Shared API's
+    /// </summary>
+    public bool SharedApiEuropeUseXPerps { get; set; }
+
+    /// <summary>
     /// Options for the Unified API
     /// </summary>
     public SocketApiOptions UnifiedOptions { get; private set; } = new SocketApiOptions();
@@ -39,6 +44,7 @@ public class OKXSocketOptions : SocketExchangeOptions<OKXEnvironment, ApiCredent
         targetOptions = base.Set<OKXSocketOptions>(targetOptions);
         targetOptions.BrokerId = BrokerId;
         targetOptions.UnifiedOptions = UnifiedOptions.Set(targetOptions.UnifiedOptions);
+        targetOptions.SharedApiEuropeUseXPerps = SharedApiEuropeUseXPerps;
         return targetOptions;
     }
 }

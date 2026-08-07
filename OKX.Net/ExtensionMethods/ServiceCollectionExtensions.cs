@@ -1,4 +1,5 @@
 ﻿using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Interfaces.Clients;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using OKX.Net;
@@ -7,7 +8,6 @@ using OKX.Net.Interfaces;
 using OKX.Net.Interfaces.Clients;
 using OKX.Net.Objects.Options;
 using OKX.Net.SymbolOrderBooks;
-using System.Net;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -18,7 +18,8 @@ namespace Microsoft.Extensions.DependencyInjection
     {
 
         /// <summary>
-        /// Add services such as the IOKXRestClient and IOKXSocketClient. Configures the services based on the provided configuration.
+        /// Add services such as the IOKXRestClient and IOKXSocketClient. Configures the services based on the provided configuration.<br />
+        /// See <see href="https://github.com/JKorf/OKX.Net/blob/main/Examples/example-config.json" /> for an example of how to set up the configuration.
         /// </summary>
         /// <param name="services">The service collection</param>
         /// <param name="configuration">The configuration(section) containing the options</param>
@@ -31,15 +32,25 @@ namespace Microsoft.Extensions.DependencyInjection
             // Reset environment so we know if they're overridden
             options.Rest.Environment = null!;
             options.Socket.Environment = null!;
-            configuration.Bind(options);
+
+            try
+            {
+                configuration.Bind(options);
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new InvalidOperationException("Invalid configuration provided", ex);
+            }
 
             if (options.Rest == null || options.Socket == null)
                 throw new ArgumentException("Options null");
 
             var restEnvName = options.Rest.Environment?.Name ?? options.Environment?.Name ?? OKXEnvironment.Live.Name;
             var socketEnvName = options.Socket.Environment?.Name ?? options.Environment?.Name ?? OKXEnvironment.Live.Name;
+            options.Rest.SharedApiEuropeUseXPerps = options.Rest.SharedApiEuropeUseXPerps || options.SharedApiEuropeUseXPerps;
             options.Rest.Environment = OKXEnvironment.GetEnvironmentByName(restEnvName) ?? options.Rest.Environment!;
             options.Rest.ApiCredentials = options.Rest.ApiCredentials ?? options.ApiCredentials;
+            options.Socket.SharedApiEuropeUseXPerps = options.Socket.SharedApiEuropeUseXPerps || options.SharedApiEuropeUseXPerps;
             options.Socket.Environment = OKXEnvironment.GetEnvironmentByName(socketEnvName) ?? options.Socket.Environment!;
             options.Socket.ApiCredentials = options.Socket.ApiCredentials ?? options.ApiCredentials;
 
@@ -67,8 +78,10 @@ namespace Microsoft.Extensions.DependencyInjection
             if (options.Rest == null || options.Socket == null)
                 throw new ArgumentException("Options null");
 
+            options.Rest.SharedApiEuropeUseXPerps = options.Rest.SharedApiEuropeUseXPerps || options.SharedApiEuropeUseXPerps;
             options.Rest.Environment = options.Rest.Environment ?? options.Environment ?? OKXEnvironment.Live;
             options.Rest.ApiCredentials = options.Rest.ApiCredentials ?? options.ApiCredentials;
+            options.Socket.SharedApiEuropeUseXPerps = options.Socket.SharedApiEuropeUseXPerps || options.SharedApiEuropeUseXPerps;
             options.Socket.Environment = options.Socket.Environment ?? options.Environment ?? OKXEnvironment.Live;
             options.Socket.ApiCredentials = options.Socket.ApiCredentials ?? options.ApiCredentials;
 
@@ -90,19 +103,16 @@ namespace Microsoft.Extensions.DependencyInjection
             }).ConfigurePrimaryHttpMessageHandler((serviceProvider) =>
             {
                 var options = serviceProvider.GetRequiredService<IOptions<OKXRestOptions>>().Value;
-                return LibraryHelpers.CreateHttpClientMessageHandler(options.Proxy, options.HttpKeepAliveInterval);
-            });
+                return LibraryHelpers.CreateHttpClientMessageHandler(options);
+            }).SetHandlerLifetime(Timeout.InfiniteTimeSpan);
             services.Add(new ServiceDescriptor(typeof(IOKXSocketClient), x => { return new OKXSocketClient(x.GetRequiredService<IOptions<OKXSocketOptions>>(), x.GetRequiredService<ILoggerFactory>()); }, socketClientLifeTime ?? ServiceLifetime.Singleton));
 
-
-            services.AddTransient<ICryptoRestClient, CryptoRestClient>();
-            services.AddTransient<ICryptoSocketClient, CryptoSocketClient>();
             services.AddTransient<IOKXOrderBookFactory, OKXOrderBookFactory>();
             services.AddTransient<IOKXTrackerFactory, OKXTrackerFactory>();
             services.AddTransient<ITrackerFactory, OKXTrackerFactory>();
             services.AddSingleton<IOKXUserClientProvider, OKXUserClientProvider>(x =>
             new OKXUserClientProvider(
-                x.GetRequiredService<HttpClient>(),
+                x.GetRequiredService<IHttpClientFactory>().CreateClient(typeof(IOKXRestClient).Name),
                 x.GetRequiredService<ILoggerFactory>(),
                 x.GetRequiredService<IOptions<OKXRestOptions>>(),
                 x.GetRequiredService<IOptions<OKXSocketOptions>>()));

@@ -40,7 +40,8 @@ namespace OKX.Net
              TradeEnvironmentNames.Live => Live,
              TradeEnvironmentNames.Testnet => Demo,
              "Europe" => Europe,
-             "DemoEu" => DemoEu,
+             "EuropeDemo" => EuropeDemo,
+             "Us" => Us,
              "" => Live,
              null => Live,
              _ => default
@@ -50,7 +51,7 @@ namespace OKX.Net
         /// Available environment names
         /// </summary>
         /// <returns></returns>
-        public static string[] All => [Live.Name, Demo.Name, Europe.Name, DemoEu.Name];
+        public static string[] All => [Live.Name, Demo.Name, Europe.Name, Us.Name];
 
         /// <summary>
         /// Live environment
@@ -67,6 +68,23 @@ namespace OKX.Net
             = new OKXEnvironment("Europe",
                                    OKXApiAddresses.Europe.UnifiedRestAddress,
                                    OKXApiAddresses.Europe.UnifiedSocketAddress);
+
+
+        /// <summary>
+        /// Live environment for Europe customers
+        /// </summary>
+        public static OKXEnvironment EuropeDemo { get; }
+            = new OKXEnvironment("EuropeDemo",
+                                   OKXApiAddresses.EuropeDemo.UnifiedRestAddress,
+                                   OKXApiAddresses.EuropeDemo.UnifiedSocketAddress);
+
+        /// <summary>
+        /// Live environment for US and AU customers
+        /// </summary>
+        public static OKXEnvironment Us { get; }
+            = new OKXEnvironment("Us",
+                                   OKXApiAddresses.Us.UnifiedRestAddress,
+                                   OKXApiAddresses.Us.UnifiedSocketAddress);
         /// <summary>
         /// Live environment
         /// </summary>
@@ -74,14 +92,6 @@ namespace OKX.Net
             = new OKXEnvironment(TradeEnvironmentNames.Testnet,
                                    OKXApiAddresses.Demo.UnifiedRestAddress,
                                    OKXApiAddresses.Demo.UnifiedSocketAddress);
-
-        /// <summary>
-        /// Demo environment for Europe customers
-        /// </summary>
-        public static OKXEnvironment DemoEu { get; }
-            = new OKXEnvironment("DemoEu",
-                                   OKXApiAddresses.DemoEu.UnifiedRestAddress,
-                                   OKXApiAddresses.DemoEu.UnifiedSocketAddress);
 
         /// <summary>
         /// Create a custom environment

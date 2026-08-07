@@ -1,9 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace OKX.Net.Objects.Account;
 
 /// <summary>
@@ -12,7 +6,7 @@ namespace OKX.Net.Objects.Account;
 public record OKXSettleAsset
 {
     /// <summary>
-    /// Settlement asset
+    /// ["<c>settleCcy</c>"] Settlement asset
     /// </summary>
     [JsonPropertyName("settleCcy")]
     public string SettleAsset { get; set; } = string.Empty;

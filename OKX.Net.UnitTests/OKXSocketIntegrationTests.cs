@@ -1,10 +1,10 @@
-﻿using OKX.Net.Clients;
-using OKX.Net.Objects.Options;
-using CryptoExchange.Net.Testing;
+﻿using CryptoExchange.Net.Testing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NUnit.Framework;
+using OKX.Net.Clients;
 using OKX.Net.Objects.Market;
+using OKX.Net.Objects.Options;
 
 namespace OKX.Net.UnitTests
 {
@@ -26,7 +26,7 @@ namespace OKX.Net.UnitTests
             return new OKXSocketClient(Options.Create(new OKXSocketOptions
             {
                 OutputOriginalData = true,
-                ApiCredentials = Authenticated ? new CryptoExchange.Net.Authentication.ApiCredentials(key, sec, pass) : null
+                ApiCredentials = Authenticated ? new OKXCredentials(key, sec, pass) : null
             }), loggerFactory);
         }
 

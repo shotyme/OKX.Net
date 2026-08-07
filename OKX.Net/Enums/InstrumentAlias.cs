@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Attributes;
 
 namespace OKX.Net.Enums;
@@ -21,5 +19,9 @@ public enum InstrumentAlias
     [Map("next_quarter")]
     NextQuarter,
     [Map("third_quarter")]
-    ThirdQuarter
+    ThirdQuarter,
+    [Map("this_five_years")]
+    ThisFiveYears,
+    [Map("fourth_quarter")]
+    FourthQuarter
 }

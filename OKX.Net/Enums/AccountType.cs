@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Attributes;
 
 namespace OKX.Net.Enums;
@@ -11,12 +9,12 @@ namespace OKX.Net.Enums;
 public enum AccountType
 {
     /// <summary>
-    /// Funding account
+    /// ["<c>6</c>"] Funding account
     /// </summary>
     [Map("6")]
     Funding,
     /// <summary>
-    /// Trading account
+    /// ["<c>18</c>"] Trading account
     /// </summary>
     [Map("18")]
     Trading,

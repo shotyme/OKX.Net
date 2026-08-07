@@ -1,13 +1,13 @@
 ﻿using CryptoExchange.Net.Objects.Options;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OKX.Net.Objects.Options;
 /// <summary>
 /// OKX options
 /// </summary>
-public class OKXOptions : LibraryOptions<OKXRestOptions, OKXSocketOptions, ApiCredentials, OKXEnvironment>
+public class OKXOptions : LibraryOptions<OKXRestOptions, OKXSocketOptions, OKXCredentials, OKXEnvironment>
 {
+    /// <summary>
+    /// Whether to use XPerps as perpetual linear contracts when using the Shared API's
+    /// </summary>
+    public bool SharedApiEuropeUseXPerps { get; set; }
 }

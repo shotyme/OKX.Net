@@ -1,4 +1,3 @@
-using CryptoExchange.Net.Converters.SystemTextJson;
 using OKX.Net.Enums;
 
 namespace OKX.Net.Objects.Account;
@@ -10,7 +9,7 @@ namespace OKX.Net.Objects.Account;
 public record OKXAccountMode
 {
     /// <summary>
-    /// Account mode
+    /// ["<c>acctLv</c>"] Account mode
     /// </summary>
     [JsonPropertyName("acctLv")]
     public AccountLevel Mode { get; set; }

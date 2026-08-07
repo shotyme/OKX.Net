@@ -1,4 +1,3 @@
-using CryptoExchange.Net.Converters.SystemTextJson;
 namespace OKX.Net.Objects.SubAccount;
 
 /// <summary>
@@ -8,7 +7,7 @@ namespace OKX.Net.Objects.SubAccount;
 public record OKXSubAccountName
 {
     /// <summary>
-    /// Name
+    /// ["<c>subAcct</c>"] Name
     /// </summary>
     [JsonPropertyName("subAcct")]
     public string SubAccountName { get; set; } = string.Empty;

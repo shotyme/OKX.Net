@@ -1,9 +1,5 @@
-﻿using CryptoExchange.Net.SharedApis;
-using CryptoExchange.Net.Trackers.Klines;
-using CryptoExchange.Net.Trackers.Trades;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CryptoExchange.Net.Trackers.UserData.Interfaces;
+using CryptoExchange.Net.Trackers.UserData.Objects;
 
 namespace OKX.Net.Interfaces
 {
@@ -12,5 +8,32 @@ namespace OKX.Net.Interfaces
     /// </summary>
     public interface IOKXTrackerFactory : ITrackerFactory
     {
+        /// <summary>
+        /// Create a new Spot user data tracker
+        /// </summary>
+        /// <param name="userIdentifier">User identifier</param>
+        /// <param name="config">Configuration</param>
+        /// <param name="credentials">Credentials</param>
+        /// <param name="environment">Environment</param>
+        IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, OKXCredentials credentials, SpotUserDataTrackerConfig? config = null, OKXEnvironment? environment = null);
+        /// <summary>
+        /// Create a new spot user data tracker
+        /// </summary>
+        /// <param name="config">Configuration</param>
+        IUserSpotDataTracker CreateUserSpotDataTracker(SpotUserDataTrackerConfig? config = null);
+
+        /// <summary>
+        /// Create a new futures user data tracker
+        /// </summary>
+        /// <param name="userIdentifier">User identifier</param>
+        /// <param name="config">Configuration</param>
+        /// <param name="credentials">Credentials</param>
+        /// <param name="environment">Environment</param>
+        IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, OKXCredentials credentials, FuturesUserDataTrackerConfig? config = null, OKXEnvironment? environment = null);
+        /// <summary>
+        /// Create a new futures user data tracker
+        /// </summary>
+        /// <param name="config">Configuration</param>
+        IUserFuturesDataTracker CreateUserFuturesDataTracker(FuturesUserDataTrackerConfig? config = null);
     }
 }
