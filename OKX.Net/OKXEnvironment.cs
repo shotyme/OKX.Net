@@ -42,6 +42,7 @@ namespace OKX.Net
              "Europe" => Europe,
              "EuropeDemo" => EuropeDemo,
              "Us" => Us,
+             "UsDemo" => UsDemo,
              "" => Live,
              null => Live,
              _ => default
@@ -85,6 +86,14 @@ namespace OKX.Net
             = new OKXEnvironment("Us",
                                    OKXApiAddresses.Us.UnifiedRestAddress,
                                    OKXApiAddresses.Us.UnifiedSocketAddress);
+
+        /// <summary>
+        /// Demo environment for US and AU customers
+        /// </summary>
+        public static OKXEnvironment UsDemo { get; }
+            = new OKXEnvironment("UsDemo",
+                                   OKXApiAddresses.UsDemo.UnifiedRestAddress,
+                                   OKXApiAddresses.UsDemo.UnifiedSocketAddress);
         /// <summary>
         /// Live environment
         /// </summary>
