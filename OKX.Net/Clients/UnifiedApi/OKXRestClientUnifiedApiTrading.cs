@@ -69,11 +69,7 @@ internal class OKXRestClientUnifiedApiTrading : IOKXRestClientUnifiedApiTrading
         parameters.Add("rpiTakerAccess", rpiTakerAccess);
         parameters.Add("slippagePct", maxSlippagePercentage);
 
-        if (attachedAlgoOrders != null)
-        {
-            foreach (var attachOrder in attachedAlgoOrders)
-                attachOrder.ClientOrderId = LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange);
-        }
+        // The broker code goes only into tag; attachAlgoClOrdId keeps the value of the caller (TvHub #451).
         parameters.AddArray("attachAlgoOrds", attachedAlgoOrders?.ToArray());
 
         parameters.Add("reduceOnly", reduceOnly);
@@ -568,7 +564,8 @@ internal class OKXRestClientUnifiedApiTrading : IOKXRestClientUnifiedApiTrading
             {"instId", symbol },
             {"tag", LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange) }
         };
-        parameters.Add("clOrdId", clientOrderId);
+        // The algo client id is algoClOrdId on order-algo; clOrdId is not a field of this endpoint (TvHub #451).
+        parameters.Add("algoClOrdId", clientOrderId);
         parameters.Add("tdMode", tradeMode);
         parameters.Add("side", orderSide);
         parameters.Add("ordType", algoOrderType);
