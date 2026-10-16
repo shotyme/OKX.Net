@@ -186,6 +186,26 @@ public interface IOKXRestClientUnifiedApiTrading
     Task<HttpResult<OKXAlgoOrder[]>> GetAlgoOrderListAsync(AlgoOrderType algoOrderType, string? algoId = null, InstrumentType? instrumentType = null, string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, int limit = 100, CancellationToken ct = default);
 
     /// <summary>
+    /// Get a list of untriggered algo orders of several algo order types in one request. OKX accepts only conditional and oco together.
+    /// <para>
+    /// Docs:<br />
+    /// <a href="https://www.okx.com/docs-v5/en/#order-book-trading-algo-trading-get-algo-order-list" /><br />
+    /// Endpoint:<br />
+    /// GET /api/v5/trade/orders-algo-pending
+    /// </para>
+    /// </summary>
+    /// <param name="algoOrderTypes">["<c>ordType</c>"] Algo order types, sent comma separated</param>
+    /// <param name="algoId">["<c>algoId</c>"] Algo ID</param>
+    /// <param name="instrumentType">["<c>instType</c>"] Instrument Type</param>
+    /// <param name="symbol">["<c>instId</c>"] Symbol, for example `ETH-USDT`</param>
+    /// <param name="startTime">["<c>before</c>"] Pagination of data to return records earlier than the requested ts</param>
+    /// <param name="endTime">["<c>after</c>"] Pagination of data to return records newer than the requested ts</param>
+    /// <param name="limit">["<c>limit</c>"] Number of results per request. The maximum is 100; the default is 100.</param>
+    /// <param name="ct">Cancellation Token</param>
+    /// <returns></returns>
+    Task<HttpResult<OKXAlgoOrder[]>> GetAlgoOrderListAsync(IEnumerable<AlgoOrderType> algoOrderTypes, string? algoId = null, InstrumentType? instrumentType = null, string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, int limit = 100, CancellationToken ct = default);
+
+    /// <summary>
     /// Get the completed order data of the last 3 months, and the incomplete orders that have been canceled are only reserved for 2 hours.
     /// <para>
     /// Docs:<br />

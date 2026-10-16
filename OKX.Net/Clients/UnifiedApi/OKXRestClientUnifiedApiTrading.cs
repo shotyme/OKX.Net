@@ -663,6 +663,37 @@ internal class OKXRestClientUnifiedApiTrading : IOKXRestClientUnifiedApiTrading
     }
 
     /// <inheritdoc />
+    public virtual async Task<HttpResult<OKXAlgoOrder[]>> GetAlgoOrderListAsync(
+        IEnumerable<AlgoOrderType> algoOrderTypes,
+        string? algoId = null,
+        InstrumentType? instrumentType = null,
+        string? symbol = null,
+        DateTime? startTime = null,
+        DateTime? endTime = null,
+        int limit = 100,
+        CancellationToken ct = default)
+    {
+        var types = algoOrderTypes.Distinct().ToArray();
+        if (types.Length == 0)
+            throw new ArgumentException("At least one algo order type is required.");
+        if (limit < 1 || limit > 100)
+            throw new ArgumentException("Limit can be between 1-100.");
+
+        var parameters = new Parameters(OKXExchange._parameterSerializationSettings);
+        parameters.Add("ordType", string.Join(",", types.Select(type => EnumConverter.GetString(type))));
+        parameters.Add("algoId", algoId);
+        parameters.Add("instId", symbol);
+        parameters.Add("before", DateTimeConverter.ConvertToMilliseconds(startTime)?.ToString(CultureInfo.InvariantCulture));
+        parameters.Add("after", DateTimeConverter.ConvertToMilliseconds(endTime)?.ToString(CultureInfo.InvariantCulture));
+        parameters.Add("limit", limit.ToString());
+        parameters.Add("instType", instrumentType);
+
+        var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "api/v5/trade/orders-algo-pending", OKXExchange.RateLimiter.EndpointGate, 1, true,
+            limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(2), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
+        return await _baseClient.SendAsync<OKXAlgoOrder[]>(request, parameters, ct).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc />
     public virtual async Task<HttpResult<OKXAlgoOrder[]>> GetAlgoOrderHistoryAsync(
         AlgoOrderType algoOrderType,
         AlgoOrderState? algoOrderState = null,
