@@ -20,7 +20,7 @@ public record OKXApiAddresses
     public static OKXApiAddresses Default = new OKXApiAddresses
     {
         UnifiedRestAddress = "https://www.okx.com",
-        UnifiedSocketAddress = "wss://ws.okx.com:8443",
+        UnifiedSocketAddress = "wss://ws.okx.com",
     };
 
     /// <summary>
@@ -29,7 +29,7 @@ public record OKXApiAddresses
     public static OKXApiAddresses Europe = new OKXApiAddresses
     {
         UnifiedRestAddress = "https://eea.okx.com",
-        UnifiedSocketAddress = "wss://wseea.okx.com:8443",
+        UnifiedSocketAddress = "wss://wseea.okx.com",
     };
 
     /// <summary>
@@ -38,7 +38,7 @@ public record OKXApiAddresses
     public static OKXApiAddresses EuropeDemo = new OKXApiAddresses
     {
         UnifiedRestAddress = "https://eea.okx.com",
-        UnifiedSocketAddress = "wss://wseeapap.okx.com:8443",
+        UnifiedSocketAddress = "wss://wseeapap.okx.com",
     };
 
     /// <summary>
@@ -47,7 +47,7 @@ public record OKXApiAddresses
     public static OKXApiAddresses Us = new OKXApiAddresses
     {
         UnifiedRestAddress = "https://us.okx.com",
-        UnifiedSocketAddress = "wss://wsus.okx.com:8443",
+        UnifiedSocketAddress = "wss://wsus.okx.com",
     };
 
     /// <summary>
@@ -56,7 +56,7 @@ public record OKXApiAddresses
     public static OKXApiAddresses UsDemo = new OKXApiAddresses
     {
         UnifiedRestAddress = "https://us.okx.com",
-        UnifiedSocketAddress = "wss://wsuspap.okx.com:8443",
+        UnifiedSocketAddress = "wss://wsuspap.okx.com",
     };
 
     /// <summary>
@@ -65,6 +65,6 @@ public record OKXApiAddresses
     public static OKXApiAddresses Demo = new OKXApiAddresses
     {
         UnifiedRestAddress = "https://www.okx.com",
-        UnifiedSocketAddress = "wss://wspap.okx.com:8443",
+        UnifiedSocketAddress = "wss://wspap.okx.com",
     };
 }
